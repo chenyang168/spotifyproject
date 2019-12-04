@@ -28,15 +28,21 @@ function getParameterByName(url,name) {
 // 	});
 // }
 
-$(function() {
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){vars[key] = value;});
-	console.log(vars)
-	return vars;
+function getUrlVars(external_url) {
+    var vars = {};
+    var parts = external_url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 
-    // var url = window.location.href;
+
+$(function() {
+    var url = window.location.href;
+	var mytext = getUrlVars(url)["access_token"]
+
     // var code = getParameterByName(url, 'access_token');
-	// console.log(code);
+	console.log(mytext);
 	
     // var grant_type = 'authorization_code';
     // var redirect_uri = 'https://yinyinumsi.github.io/649GroupProject/main.html';
