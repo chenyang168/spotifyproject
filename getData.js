@@ -29,9 +29,15 @@ function getParameterByName(url,name) {
 // }
 
 $(function() {
-    var url = window.location.href;
-    var code = getParameterByName(url, 'access_token');
-    console.log(code);
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){vars[key] = value;});
+	console.log(vars)
+	return vars;
+
+    // var url = window.location.href;
+    // var code = getParameterByName(url, 'access_token');
+	// console.log(code);
+	
     // var grant_type = 'authorization_code';
     // var redirect_uri = 'https://yinyinumsi.github.io/649GroupProject/main.html';
     // var params = {	code: code,
