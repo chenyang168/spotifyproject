@@ -13,37 +13,26 @@ function getParameterByName(url,name) {
     return results == null ? "": decodeURIComponent(results[1]);
 }
 // the above function is from https://www.cnblogs.com/season-huang/p/3322561.html
-// function getMyTracks(token) {
-// 	var params = {'offset':0, 'limit': 50}
-// 	$.ajax({
-// 		url: myTrackUrl,
-// 		headers: {
-//     		"Authorization":"Bearer "+ token,
-//     	},
-//     	method: 'GET',
-//     	data: jQuery.param(params),
-//     	dataType: 'json',
-// 	}).then(function(data) {
-// 		console.log(data);
-// 	});
-// }
-
-function getUrlVars(external_url) {
-    var vars = {};
-    var parts = external_url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+function getMyTracks(token) {
+	var params = {'offset':0, 'limit': 50}
+	$.ajax({
+		url: myTrackUrl,
+		headers: {
+    		"Authorization":"Bearer "+ token,
+    	},
+    	method: 'GET',
+    	data: jQuery.param(params),
+    	dataType: 'json',
+	}).then(function(data) {
+		console.log(data);
+	});
 }
-
 
 $(function() {
     var url = window.location.href;
-	var mytext = getUrlVars(url)["access_token"]
-
-    // var code = getParameterByName(url, 'access_token');
-	console.log(mytext);
-	
+	var access_token = getParameterByName(url, 'access_token');
+	getMyTracks(access_token)
+    // console.log(url);
     // var grant_type = 'authorization_code';
     // var redirect_uri = 'https://yinyinumsi.github.io/649GroupProject/main.html';
     // var params = {	code: code,
