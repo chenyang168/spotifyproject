@@ -30,17 +30,18 @@ function getMyTracks(token) {
 
 $(function() {
     var url = window.location.href;
-	var access_token = getParameterByName(url, '#access_token');
-	var access_token_2 = getParameterByName(url, 'access_token');
-	var type = getParameterByName(url, 'token_type');
-	var expires_in = getParameterByName(url, 'expires_in');
+	var access_token = window.location.hash.substr(1);
+	var access_token_2 = window.location.hash;
+	// var access_token_2 = getParameterByName(url, 'access_token');
+	// var type = getParameterByName(url, 'token_type');
+	// var expires_in = getParameterByName(url, 'expires_in');
 
 	console.log(url);
 	console.log(access_token);
 	console.log(access_token_2);
-	console.log(type);
-	console.log(expires_in);
-	console.log(url.access_token_2);
+
+	
+	
     // var grant_type = 'authorization_code';
     // var redirect_uri = 'https://yinyinumsi.github.io/649GroupProject/main.html';
     // var params = {	code: code,
