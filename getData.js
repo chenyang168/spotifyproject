@@ -29,16 +29,13 @@ function getMyTracks(token) {
 }
 
 $(function() {
-    // var url = window.location.href;
 	var hash = window.location.hash.substr(1);
 	var result = hash.split('&').reduce(function (result, item) {
     var parts = item.split('=');
     result[parts[0]] = parts[1];
     return result;
 	}, {});
-
-	console.log(result)
-	console.log(result.access_token)
+	getMyTracks(result.access_token)
 	// var access_token_2 = getParameterByName(url, 'access_token');
 	// var type = getParameterByName(url, 'token_type');
 	// var expires_in = getParameterByName(url, 'expires_in');
