@@ -31,8 +31,12 @@ function getMyTracks(token) {
 $(function() {
     var url = window.location.href;
 	var access_token = getParameterByName(url, '#access_token');
-	getMyTracks(access_token)
-    console.log(access_token);
+	var access_token_2 = getParameterByName(url, 'access_token');
+
+	console.log(url);
+	console.log(access_token);
+	console.log(access_token_2);
+	console.log(url.access_token);
     // var grant_type = 'authorization_code';
     // var redirect_uri = 'https://yinyinumsi.github.io/649GroupProject/main.html';
     // var params = {	code: code,
