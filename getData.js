@@ -4,26 +4,55 @@ var Base64Encode = btoa(client_id+':'+client_secret);
 var auth = 'Basic ' + Base64Encode;
 var myTrackUrl = "https://api.spotify.com/v1/me/tracks";
 var proxyurl = 'https://cors-anywhere.herokuapp.com/';
-var offset = 0
+var allTracks = [];
 
 
-function getMyTracks(token) {
-	var params = {'offset':0, 'limit': 50}
-	$.ajax({
-		url: myTrackUrl,
-		headers: {
-    		"Authorization":"Bearer "+ token,
-    	},
-    	method: 'GET',
-    	data: jQuery.param(params),
-    	dataType: 'json',
-	}).then(function(data) {
-		console.log(data);
-		var totalnum = data.total
-		var times = Math.ceil(totalnum / 50) - 1
-		console.log(times)
-	});
+function getTrackNumber(token) {
+	var params = {'offset':0, 'limit': 50};
+    console.log('shouldprint');
+	return $.ajax({
+        		url: myTrackUrl,
+        		headers: {
+            		"Authorization":"Bearer "+ token,
+            	},
+                data: jQuery.param(params),
+            	method: 'GET',
+            	dataType: 'json',
+        	});
 }
+
+function data_savedTrack(allItems) {
+    var cleanItems = [];
+    for(item of allItems) {
+        var oneItem = {}
+        oneItem['id'] = item.track.id;
+        oneItem['added_at'] = item.added_at;
+        oneItem['artists'] = data_artist(item.track.artists);
+        oneItem['trackName'] = item.track.name;
+        console.log(item.track.id, oneItem['artists']);
+        cleanItems.push(oneItem);
+    }
+    return cleanItems;
+}
+
+function getMyTracks(token, pageNo) {
+    var offset = 50*pageNo;
+    var params = {'offset':offset, 'limit': 50}
+    return $.ajax({
+                url: myTrackUrl,
+                headers: {
+                    "Authorization":"Bearer "+ token,
+                },
+                method: 'GET',
+                data: jQuery.param(params),
+                dataType: 'json',
+                success: function(data) {
+                    allTracks = allTracks.concat(data_savedTrack(data.items));
+                }
+            });
+}
+
+
 
 $(function() {
 	var hash = window.location.hash.substr(1);
@@ -32,6 +61,26 @@ $(function() {
     result[parts[0]] = parts[1];
     return result;
 	}, {});
-	getMyTracks(result.access_token)
+	var token = result.access_token;
+	getTrackNumber(result.access_token).then(function(data) {
+		var deferreds = [];
+		var total = data.total;
+		for(var i=0; i<Math.ceil(total/50); i++) {
+			deferreds.push(getMyTracks(token, i));
+		}
+		// $.when.apply($, deferreds).then(function() {
+		// 	// console.log(allTracks);
+		// 	$.when.apply($,getTrackGenre()).then(function() {
+		// 		console.log(allTracks);
+		// 	});
+		// })
+	})
 
 });
+
+// ****************
+
+
+
+
+
