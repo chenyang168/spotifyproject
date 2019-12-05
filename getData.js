@@ -35,6 +35,17 @@ function data_savedTrack(allItems) {
     return cleanItems;
 }
 
+function data_artist(artists) {
+    var allArtists = [];
+    for(artist of artists) {
+        var oneArtist = {};
+        oneArtist['id'] = artist['id'];
+        oneArtist['name'] = artist['name'];
+        allArtists.push(oneArtist);
+    }
+    return allArtists;
+}
+
 function getMyTracks(token, pageNo) {
     var offset = 50*pageNo;
     var params = {'offset':offset, 'limit': 50}
