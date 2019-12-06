@@ -67,31 +67,6 @@ function getMyTracks(token, pageNo) {
 }
 
 
-// //************************* */
-// function getGenresForTrack(track) {
-//     var genres = [];
-//     var albumId = track.details.album_id;
-//     if (albumId in curAlbums) {
-//         var album = curAlbums[albumId];
-//         _.each(album.genres, function(g) {
-//             genres.push(g);
-//         });
-//     }
-//     _.each(track.details.artists, function(artist) {
-//         if (artist.id in curArtists) {
-//             var detailedArtist = curArtists[artist.id];
-//             _.each(detailedArtist.genres, function(genre) {
-//                 genres.push(genre);
-//             });
-//         }
-//     });
-//     if (genres.length == 0) {
-//         genres.push('(unclassified genre)');
-//     }
-//     return genres;
-// }
-// //************************* */
-
 function getTrackGenre(token) {
     // var deferreds = [];
     var token = token;
@@ -107,7 +82,7 @@ function getTrackGenre(token) {
                     },
                     indexValue: i,
                     method: 'GET',
-                    data: jQuery.param(params),
+                    // data: jQuery.param(params),
                     dataType: 'json',
                     success: function(data) {
                         var genre = data.genres;
@@ -123,7 +98,7 @@ function getTrackGenre(token) {
                                 },
                                 indexValue: i,
                                 method: 'GET',
-                                data: jQuery.param(params),
+                                // data: jQuery.param(params),
                                 dataType: 'json',
                                 success: function(data) {
                                     var genre = data.genres;
@@ -148,9 +123,13 @@ function getTrackGenre(token) {
 
 
 function addToTrack(data, i) {    
+    allTracks[i]['genre'] = data[0];
+}
 
-    console.log('add genre')
-    // allTracks[i]['genre'] = data[0];
+
+getFeatures(token){
+    var token = token;
+
 }
 
 
@@ -171,14 +150,16 @@ $(function() {
 		$.when.apply($, deferreds).then(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
-				console.log(trackGenre);
+                // console.log(trackGenre);
+                $.when.apply($,getFeatures(token)).then(function() {
+                    // console.log(trackGenre);
+                });
 			});
 		})
 	})
 
 });
 
-// ****************
 
 
 
