@@ -92,13 +92,13 @@ function getMyTracks(token, pageNo) {
 // }
 // //************************* */
 
-function getTrackGenre() {
+function getTrackGenre(token) {
     // var deferreds = [];
+    var token = token;
     for (var i=0; i<allTracks.length; i++) {
         var artistId = allTracks[i]['artists'][0]['id'];
         var albumId = allTracks[i]['albumid'];
         var trackId = allTracks[i]['id'];
-
         if (!(trackId in trackGenre)){
             var request =  $.ajax({
                     url: 'https://api.spotify.com/v1/artists/'+ artistId,
@@ -111,33 +111,46 @@ function getTrackGenre() {
                     dataType: 'json',
                     success: function(data) {
                         var genre = data.genres;
-                        trackGenre[trackId] = genre
-                        console.log(genre)
-                        // addToTrack(genres, this.indexValue);
+                        if(genre.length != 0){
+                            trackGenre[trackId] = genre
+                            console.log(genre)
+                            addToTrack(genres, this.indexValue);
+                        }else{
+                            var request =  $.ajax({
+                                url: 'https://api.spotify.com/v1/albums/'+ albumId,
+                                headers: {
+                                    "Authorization":"Bearer "+ token,
+                                },
+                                indexValue: i,
+                                method: 'GET',
+                                data: jQuery.param(params),
+                                dataType: 'json',
+                                success: function(data) {
+                                    var genre = data.genres;
+                                    if(genre.length != 0){
+                                        trackGenre[trackId] = genre
+                                        console.log(genre)
+                                        addToTrack(genres, this.indexValue);
+                                    }else{
+                                        genre = ['Unknown']
+                                        addToTrack(genres, this.indexValue);
+                                    } 
+                                }
+                            })
+                        }
                     }
                 })
         }else{
-            console.log('genre exists')
+            addToTrack(trackGenre[trackId], i);
         }
-        // var searchTerm = allTracks[i]['artists'][0]['name'];
-        // var params = {term:searchTerm};
-        // var request =  $.ajax({
-        //                     url: aristUrl+searchTerm,
-        //                     headers: {
-        //                         "Authorization":"Bearer "+ token,
-        //                     },
-        //                     indexValue: i,
-        //                     method: 'GET',
-        //                     data: jQuery.param(params),
-        //                     dataType: 'json',
-        //                     success: function(data) {
-        //                         var data = data;
-        //                         addToTrack(genres, this.indexValue);
-        //                     }
-        //                 })
-        // deferreds.push(request)
     } 
-    // return deferreds;
+}
+
+
+function addToTrack(data, i) {    
+
+    console.log('add genre')
+    // allTracks[i]['genre'] = data[0];
 }
 
 
@@ -156,9 +169,9 @@ $(function() {
 			deferreds.push(getMyTracks(token, i));
 		}
 		$.when.apply($, deferreds).then(function() {
-			console.log(allTracks);
-			$.when.apply($,getTrackGenre()).then(function() {
-				// console.log(allTracks);
+			// console.log(allTracks);
+			$.when.apply($,getTrackGenre(token)).then(function() {
+				console.log(trackGenre);
 			});
 		})
 	})
