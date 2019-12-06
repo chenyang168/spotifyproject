@@ -186,46 +186,62 @@ function GetFeaturesfromIds(ids,total,token){
                     
                     console.log(finalData);
 
-                    // Convert Object to JSON
-                    var jsonObject = JSON.stringify(finalData);
-            
-                    // Display JSON
-                    $('#json').text(jsonObject);
-            
-                    // Convert JSON to CSV & Display CSV
-                    $('#csv').text(ConvertToCSV(jsonObject));
-
-                    var alldata = `<p> </p>`
-                    
-                    for(item in finalData){
-                        alldata += ` <p> ${item.name},${item.id} </p>
-                    `}
-
-                    document.getElementById("alldata").innerHTML = alldata;
+                    downloadCSV({ filename: "stock-data.csv" },finalData)
                  
                     }
-
                 }
             });
 }
 
+function convertArrayOfObjectsToCSV(args) {  
+    var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
-function ConvertToCSV(objArray) {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = '';
-
-    for (var i = 0; i < array.length; i++) {
-        var line = '';
-        for (var index in array[i]) {
-            if (line != '') line += ','
-
-            line += array[i][index];
-        }
-
-        str += line + '\r\n';
+    data = args.data || null;
+    if (data == null || !data.length) {
+        return null;
     }
 
-    return str;
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
+
+    keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+
+    data.forEach(function(item) {
+        ctr = 0;
+        keys.forEach(function(key) {
+            if (ctr > 0) result += columnDelimiter;
+
+            result += item[key];
+            ctr++;
+        });
+        result += lineDelimiter;
+    });
+
+    return result;
+}
+
+function downloadCSV(args, newData ) {  
+    var data, filename, link;
+    var csv = convertArrayOfObjectsToCSV({
+        data: newData
+    });
+    if (csv == null) return;
+
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
 }
 
 
