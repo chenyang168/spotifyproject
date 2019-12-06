@@ -134,9 +134,10 @@ function addToTrack(data, i) {
 
 
 
-function GetIdLists(total){
+function GetIdLists(total,token){
     var oneHundredListNum =  Math.ceil(total / 100); 
     var index = 1;
+    var token = token;
     for(track of allTracks) { 
         allIds.push(track.id)
     } 
@@ -144,19 +145,20 @@ function GetIdLists(total){
         if(i!=1){
             var start = (index - 1)*100;
             var end = index * 100;
-            GetFeaturesfromIds(allIds.slice(start,end),total)
+            GetFeaturesfromIds(allIds.slice(start,end),total,token)
             index ++;                        
         }else{
             var remainder = totalnum % (100 * index);
             var start = (index - 1)*100;
             var end = remainder + start;
-            GetFeaturesfromIds(allIds.slice(start,end),total)
+            GetFeaturesfromIds(allIds.slice(start,end),total,token)
         }
       }   
 }
 
 
-function GetFeaturesfromIds(ids,total){
+function GetFeaturesfromIds(ids,total,token){
+    var token = token;
     var trackIds = ids;
     var params = {ids:trackIds.join(',')}
     return $.ajax({
@@ -211,7 +213,7 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 console.log(allTracks)
-                $.when.apply($,GetIdLists(total)).then(function() {
+                $.when.apply($,GetIdLists(total,token)).then(function() {
                     console.log(finalData);
                 });
 			});
