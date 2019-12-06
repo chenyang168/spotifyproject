@@ -8,7 +8,7 @@ var allTracks = [];
 var trackGenre = {}
 var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
-var featureData = [];
+var finalData = [];
 
 
 function getTrackNumber(token) {
@@ -169,9 +169,9 @@ function GetFeaturesfromIds(ids,total){
                 dataType: 'json',
                 success: function(data) {
                     console.log(data.audio_features);
-                    featureData = featureData.concat(data.audio_features)
-                    if(featureData.length == total){
-                        for(track_f of featureData){
+                    finalData = finalData.concat(data.audio_features)
+                    if(finalData.length == total){
+                        for(track_f of finalData){
                             console.log(track_f)
                             for (track_t of allTracks){
                                 if(tracf_f.id == track_t.id){
@@ -190,50 +190,7 @@ function GetFeaturesfromIds(ids,total){
 
                 }
             });
-    
-    // request({
-    //     uri: idsUrl,
-    //     qs: {},
-    //     headers:{"Authorization":"Bearer "+ access_token}
-    // },
-    // function(err,res){
-    //     if(res){
-    //         var trackFeatures = JSON.parse(res.body);
-    //         featureData = featureData.concat(trackFeatures.audio_features)
-    //         if(featureData.length == totalnum){
-    //             featureData.forEach(
-    //                 function(item){
-    //                     trackData.forEach(
-    //                         function(i){
-    //                             if(item.id == i.id){
-    //                                 item.ArtistName = i.ArtistName;
-    //                                 item.AlbumName = i.AlbumName;
-    //                                 item.name = i.name
-    //                             }
-    //                         }
-    //                     )
-    //                 }
-    //             )
-
-    //             csvWriter
-    //             .writeRecords(featureData)
-    //             .then(()=> console.log('The CSV file was written successfully'));
-
-    //         }
-    // }if(err){
-    //     console.log(err)
-    // }
-
-    // })
-
-
 }
-
-
-// function getFeatures(token){
-//     var token = token;
-
-// }
 
 
 $(function() {
@@ -254,11 +211,9 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 console.log(allTracks)
-                // console.log(trackGenre);
-                GetIdLists(total)
-                // $.when.apply($,getFeatures(token)).then(function() {
-                //     // console.log(trackGenre);
-                // });
+                $.when.apply($,GetIdLists(total)).then(function() {
+                    console.log(finalData);
+                });
 			});
 		})
 	})
