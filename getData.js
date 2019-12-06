@@ -184,22 +184,25 @@ function GetFeaturesfromIds(ids,total,token){
                             }
                         }
                     
-
                     console.log(finalData);
-                    // // Convert Object to JSON
-                    // var jsonObject = JSON.stringify(finalData);
-            
-                    // // Display JSON
-                    // $('#json').text(jsonObject);
-            
-                    // // Convert JSON to CSV & Display CSV
-                    // $('#csv').text(ConvertToCSV(jsonObject));
 
-                    var alldata = `
-                        <p> ${finalData} </p>
-                    `
+                    // Convert Object to JSON
+                    var jsonObject = JSON.stringify(finalData);
+            
+                    // Display JSON
+                    $('#json').text(jsonObject);
+            
+                    // Convert JSON to CSV & Display CSV
+                    $('#csv').text(ConvertToCSV(jsonObject));
+
+                    var alldata = `<p> </p>`
+                    
+                    for(item in finalData){
+                        alldata += ` <p> ${item.name},${item.id} </p>
+                    `}
+
                     document.getElementById("alldata").innerHTML = alldata;
-    
+                 
                     }
 
                 }
