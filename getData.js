@@ -148,7 +148,7 @@ function GetIdLists(total,token){
             GetFeaturesfromIds(allIds.slice(start,end),total,token)
             index ++;                        
         }else{
-            var remainder = totalnum % (100 * index);
+            var remainder = total % (100 * index);
             var start = (index - 1)*100;
             var end = remainder + start;
             GetFeaturesfromIds(allIds.slice(start,end),total,token)
@@ -195,6 +195,25 @@ function GetFeaturesfromIds(ids,total,token){
 }
 
 
+function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
+}
+
+
 $(function() {
 	var hash = window.location.hash.substr(1);
 	var result = hash.split('&').reduce(function (result, item) {
@@ -215,6 +234,15 @@ $(function() {
                 console.log(allTracks)
                 $.when.apply($,GetIdLists(total,token)).then(function() {
                     console.log(finalData);
+
+                    // Convert Object to JSON
+                    var jsonObject = JSON.stringify(finalData);
+            
+                    // Display JSON
+                    $('#json').text(jsonObject);
+            
+                    // Convert JSON to CSV & Display CSV
+                    $('#csv').text(ConvertToCSV(jsonObject));
                 });
 			});
 		})
