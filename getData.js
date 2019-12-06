@@ -8,6 +8,7 @@ var allTracks = [];
 var trackGenre = {}
 var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
+var featureData = [];
 
 
 function getTrackNumber(token) {
@@ -124,7 +125,8 @@ function getTrackGenre(token) {
 }
 
 
-function addToTrack(data, i) {    
+function addToTrack(data, i) {   
+    console.log(i) 
     allTracks[i]['genre'] = data[0];
 }
 
@@ -134,26 +136,23 @@ function addToTrack(data, i) {
 function GetIdLists(total){
     var oneHundredListNum =  Math.ceil(total / 100); 
     var index = 1;
-
     for(track of allTracks) { 
         allIds.push(track.id)
     } 
-
     console.log(allIds)
-
-    // for (i = oneHundredListNum; i > 0; i--) {
-    //     if(i!=1){
-    //         var start = (index - 1)*100;
-    //         var end = index * 100;
-    //         GetFeaturesfromIds(allIds.slice(start,end),total)
-    //         index ++;                        
-    //     }else{
-    //         var remainder = totalnum % (100 * index);
-    //         var start = (index - 1)*100;
-    //         var end = remainder + start;
-    //         GetFeaturesfromIds(allIds.slice(start,end),total)
-    //     }
-    //   }   
+    for (i = oneHundredListNum; i > 0; i--) {
+        if(i!=1){
+            var start = (index - 1)*100;
+            var end = index * 100;
+            GetFeaturesfromIds(allIds.slice(start,end),total)
+            index ++;                        
+        }else{
+            var remainder = totalnum % (100 * index);
+            var start = (index - 1)*100;
+            var end = remainder + start;
+            GetFeaturesfromIds(allIds.slice(start,end),total)
+        }
+      }   
 }
 
 
@@ -170,10 +169,22 @@ function GetFeaturesfromIds(ids,total){
                 dataType: 'json',
                 success: function(data) {
                     console.log(data.audio_features);
+                    featureData = featureData.concat(data.audio_features)
+                    if(featureData.length == total){
+                        
+                        for(track_f of featureData){
+                            console.log(track_f)
+                            // for (track_t of allTracks){
+                            //     if(tracf_f.id == track_t.id){
+                            //     }
+                            // }
+                        }
+                        
+                 
+                    }
+
                 }
             });
-
-
     
     // request({
     //     uri: idsUrl,
