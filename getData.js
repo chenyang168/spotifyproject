@@ -6,6 +6,8 @@ var myTrackUrl = "https://api.spotify.com/v1/me/tracks";
 var proxyurl = 'https://cors-anywhere.herokuapp.com/';
 var allTracks = [];
 var trackGenre = {}
+var allIds = [];
+var idsUrl =  'https://api.spotify.com/v1/audio-features';
 
 
 function getTrackNumber(token) {
@@ -89,7 +91,7 @@ function getTrackGenre(token) {
                         if(genre.length != 0){
                             trackGenre[trackId] = genre
                             console.log(genre)
-                            addToTrack(genres, this.indexValue);
+                            addToTrack(genre, this.indexValue);
                         }else{
                             var request =  $.ajax({
                                 url: 'https://api.spotify.com/v1/albums/'+ albumId,
@@ -105,10 +107,10 @@ function getTrackGenre(token) {
                                     if(genre.length != 0){
                                         trackGenre[trackId] = genre
                                         console.log(genre)
-                                        addToTrack(genres, this.indexValue);
+                                        addToTrack(genre, this.indexValue);
                                     }else{
                                         genre = ['Unknown']
-                                        addToTrack(genres, this.indexValue);
+                                        addToTrack(genre, this.indexValue);
                                     } 
                                 }
                             })
@@ -127,25 +129,89 @@ function addToTrack(data, i) {
 }
 
 
+
+
 function GetIdLists(total){
     var oneHundredListNum =  Math.ceil(total / 100); 
     var index = 1;
-    for (i = oneHundredListNum; i > 0; i--) {
-        if(i!=1){
-            var start = (index - 1)*100;
-            var end = index * 100;
-            GetFeaturesfromIds(allIds.slice(start,end),totalnum)
-            index ++;                        
-        }else{
-            var remainder = totalnum % (100 * index);
-            var start = (index - 1)*100;
-            var end = remainder + start;
-            GetFeaturesfromIds(allIds.slice(start,end),totalnum)
-        }
-      }   
+
+    for(track of allTracks) { 
+        allIds.push(track.id)
+    } 
+
+    console.log(allIds)
+
+    // for (i = oneHundredListNum; i > 0; i--) {
+    //     if(i!=1){
+    //         var start = (index - 1)*100;
+    //         var end = index * 100;
+    //         GetFeaturesfromIds(allIds.slice(start,end),total)
+    //         index ++;                        
+    //     }else{
+    //         var remainder = totalnum % (100 * index);
+    //         var start = (index - 1)*100;
+    //         var end = remainder + start;
+    //         GetFeaturesfromIds(allIds.slice(start,end),total)
+    //     }
+    //   }   
 }
 
 
+function GetFeaturesfromIds(ids,total){
+    var trackIds = ids;
+    var params = {ids:trackIds.join(',')}
+    return $.ajax({
+                url: idsUrl,
+                headers: {
+                    "Authorization":"Bearer "+ token,
+                },
+                method: 'GET',
+                data: jQuery.param(params),
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data.audio_features);
+                }
+            });
+
+
+    
+    // request({
+    //     uri: idsUrl,
+    //     qs: {},
+    //     headers:{"Authorization":"Bearer "+ access_token}
+    // },
+    // function(err,res){
+    //     if(res){
+    //         var trackFeatures = JSON.parse(res.body);
+    //         featureData = featureData.concat(trackFeatures.audio_features)
+    //         if(featureData.length == totalnum){
+    //             featureData.forEach(
+    //                 function(item){
+    //                     trackData.forEach(
+    //                         function(i){
+    //                             if(item.id == i.id){
+    //                                 item.ArtistName = i.ArtistName;
+    //                                 item.AlbumName = i.AlbumName;
+    //                                 item.name = i.name
+    //                             }
+    //                         }
+    //                     )
+    //                 }
+    //             )
+
+    //             csvWriter
+    //             .writeRecords(featureData)
+    //             .then(()=> console.log('The CSV file was written successfully'));
+
+    //         }
+    // }if(err){
+    //     console.log(err)
+    // }
+
+    // })
+
+
+}
 
 
 // function getFeatures(token){
@@ -172,7 +238,7 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 // console.log(trackGenre);
-                // GetIdLists(total)
+                GetIdLists(total)
                 // $.when.apply($,getFeatures(token)).then(function() {
                 //     // console.log(trackGenre);
                 // });
