@@ -151,9 +151,9 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 // console.log(trackGenre);
-                $.when.apply($,getFeatures(token)).then(function() {
-                    // console.log(trackGenre);
-                });
+                // $.when.apply($,getFeatures(token)).then(function() {
+                //     // console.log(trackGenre);
+                // });
 			});
 		})
 	})
