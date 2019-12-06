@@ -85,7 +85,6 @@ function getTrackGenre(token) {
                     },
                     indexValue: i,
                     method: 'GET',
-                    // data: jQuery.param(params),
                     dataType: 'json',
                     success: function(data) {
                         var genre = data.genres;
@@ -101,7 +100,6 @@ function getTrackGenre(token) {
                                 },
                                 indexValue: i,
                                 method: 'GET',
-                                // data: jQuery.param(params),
                                 dataType: 'json',
                                 success: function(data) {
                                     var genre = data.genres;
@@ -122,12 +120,16 @@ function getTrackGenre(token) {
             addToTrack(trackGenre[trackId], i);
         }
     } 
+
+    console.log(allTracks.length)
+
 }
 
 
 function addToTrack(data, i) {   
-    console.log(i) 
-    allTracks[i]['genre'] = data[0];
+    if(i<allTracks.length){
+        allTracks[i]['genre'] = data[0];
+    }
 }
 
 
@@ -139,7 +141,6 @@ function GetIdLists(total){
     for(track of allTracks) { 
         allIds.push(track.id)
     } 
-    console.log(allIds)
     for (i = oneHundredListNum; i > 0; i--) {
         if(i!=1){
             var start = (index - 1)*100;
@@ -171,13 +172,18 @@ function GetFeaturesfromIds(ids,total){
                     console.log(data.audio_features);
                     featureData = featureData.concat(data.audio_features)
                     if(featureData.length == total){
-                        
                         for(track_f of featureData){
                             console.log(track_f)
-                            // for (track_t of allTracks){
-                            //     if(tracf_f.id == track_t.id){
-                            //     }
-                            // }
+                            for (track_t of allTracks){
+                                if(tracf_f.id == track_t.id){
+                                    track_f['added_at'] = track_t.added_at;
+                                    track_f['albumid'] = track_t.albumid;
+                                    track_f['artists'] = track_t.artists;
+                                    track_f['genre'] = track_t.genre;
+                                    track_f['imagehref'] = track_t.imagehref;
+                                    track_f['trackName'] = track_t.trackName;
+                                }
+                            }
                         }
                         
                  
