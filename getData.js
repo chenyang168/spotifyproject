@@ -5,6 +5,7 @@ var auth = 'Basic ' + Base64Encode;
 var myTrackUrl = "https://api.spotify.com/v1/me/tracks";
 var proxyurl = 'https://cors-anywhere.herokuapp.com/';
 var allTracks = [];
+var curAlbums = {}
 
 
 function getTrackNumber(token) {
@@ -29,7 +30,7 @@ function data_savedTrack(allItems) {
         oneItem['added_at'] = item.added_at;
         oneItem['artists'] = data_artist(item.track.artists);
         oneItem['trackName'] = item.track.name;
-        console.log(item.track.id, oneItem['artists']);
+        console.log(item);
         cleanItems.push(oneItem);
     }
     return cleanItems;
@@ -63,6 +64,31 @@ function getMyTracks(token, pageNo) {
             });
 }
 
+
+// //************************* */
+// function getGenresForTrack(track) {
+//     var genres = [];
+//     var albumId = track.details.album_id;
+//     if (albumId in curAlbums) {
+//         var album = curAlbums[albumId];
+//         _.each(album.genres, function(g) {
+//             genres.push(g);
+//         });
+//     }
+//     _.each(track.details.artists, function(artist) {
+//         if (artist.id in curArtists) {
+//             var detailedArtist = curArtists[artist.id];
+//             _.each(detailedArtist.genres, function(genre) {
+//                 genres.push(genre);
+//             });
+//         }
+//     });
+//     if (genres.length == 0) {
+//         genres.push('(unclassified genre)');
+//     }
+//     return genres;
+// }
+// //************************* */
 
 
 $(function() {
