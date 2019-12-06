@@ -36,7 +36,6 @@ function data_savedTrack(allItems) {
         oneItem['albumid'] = item.track.album.id;
         oneItem['imagehref'] = item.track.album.images[0]['url'];
         cleanItems.push(oneItem);
-        // console.log(oneItem);
     }
     return cleanItems;
 }
@@ -170,13 +169,11 @@ function GetFeaturesfromIds(ids,total,token){
                 data: jQuery.param(params),
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data.audio_features);
                     finalData = finalData.concat(data.audio_features)
                     if(finalData.length == total){
                         for(track_f of finalData){
-                            console.log(track_f)
                             for (track_t of allTracks){
-                                if(tracf_f.id == track_t.id){
+                                if(track_f.id == track_t.id){
                                     track_f['added_at'] = track_t.added_at;
                                     track_f['albumid'] = track_t.albumid;
                                     track_f['artists'] = track_t.artists;
@@ -231,7 +228,6 @@ $(function() {
 		$.when.apply($, deferreds).then(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
-                console.log(allTracks)
                 $.when.apply($,GetIdLists(total,token)).then(function() {
                     console.log(finalData);
 
@@ -243,6 +239,12 @@ $(function() {
             
                     // // Convert JSON to CSV & Display CSV
                     // $('#csv').text(ConvertToCSV(jsonObject));
+
+                    var alldata = `
+                        <p> ${bkinfo.description} </p>
+                    `
+                    document.getElementById("alldata").innerHTML = alldata;
+
                 });
 			});
 		})
