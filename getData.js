@@ -30,9 +30,10 @@ function data_savedTrack(allItems) {
         oneItem['added_at'] = item.added_at;
         oneItem['artists'] = data_artist(item.track.artists);
         oneItem['trackName'] = item.track.name;
+        oneItem['albumid'] = item.track.album.id;
+        oneItem['imagehref'] = item.track.album.images[0]['url'];
         cleanItems.push(oneItem);
         console.log(oneItem);
-
     }
     return cleanItems;
 }
@@ -96,7 +97,7 @@ function getTrackGenre() {
     for (var i=0; i<allTracks.length; i++) {
         var artistId = allTracks[i]['artists'][0]['id'];
         var albumId = '';
-        var trackId = '';
+        var trackId = allTracks[i]['id'];
 
         if (!(trackId in trackGenre)){
 
