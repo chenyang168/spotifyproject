@@ -183,8 +183,23 @@ function GetFeaturesfromIds(ids,total,token){
                                 }
                             }
                         }
-                        
-                 
+                    
+
+                    console.log(finalData);
+                    // // Convert Object to JSON
+                    // var jsonObject = JSON.stringify(finalData);
+            
+                    // // Display JSON
+                    // $('#json').text(jsonObject);
+            
+                    // // Convert JSON to CSV & Display CSV
+                    // $('#csv').text(ConvertToCSV(jsonObject));
+
+                    var alldata = `
+                        <p> ${finalData} </p>
+                    `
+                    document.getElementById("alldata").innerHTML = alldata;
+    
                     }
 
                 }
@@ -229,22 +244,6 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 $.when.apply($,GetIdLists(total,token)).then(function() {
-                    console.log(finalData);
-
-                    // // Convert Object to JSON
-                    // var jsonObject = JSON.stringify(finalData);
-            
-                    // // Display JSON
-                    // $('#json').text(jsonObject);
-            
-                    // // Convert JSON to CSV & Display CSV
-                    // $('#csv').text(ConvertToCSV(jsonObject));
-
-                    var alldata = `
-                        <p> ${bkinfo.description} </p>
-                    `
-                    document.getElementById("alldata").innerHTML = alldata;
-
                 });
 			});
 		})
