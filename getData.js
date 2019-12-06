@@ -235,14 +235,14 @@ $(function() {
                 $.when.apply($,GetIdLists(total,token)).then(function() {
                     console.log(finalData);
 
-                    // Convert Object to JSON
-                    var jsonObject = JSON.stringify(finalData);
+                    // // Convert Object to JSON
+                    // var jsonObject = JSON.stringify(finalData);
             
-                    // Display JSON
-                    $('#json').text(jsonObject);
+                    // // Display JSON
+                    // $('#json').text(jsonObject);
             
-                    // Convert JSON to CSV & Display CSV
-                    $('#csv').text(ConvertToCSV(jsonObject));
+                    // // Convert JSON to CSV & Display CSV
+                    // $('#csv').text(ConvertToCSV(jsonObject));
                 });
 			});
 		})
