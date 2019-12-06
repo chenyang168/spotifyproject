@@ -36,7 +36,7 @@ function data_savedTrack(allItems) {
         oneItem['albumid'] = item.track.album.id;
         oneItem['imagehref'] = item.track.album.images[0]['url'];
         cleanItems.push(oneItem);
-        console.log(oneItem);
+        // console.log(oneItem);
     }
     return cleanItems;
 }
@@ -90,7 +90,7 @@ function getTrackGenre(token) {
                         var genre = data.genres;
                         if(genre.length != 0){
                             trackGenre[trackId] = genre
-                            console.log(genre)
+                            // console.log(genre)
                             addToTrack(genre, this.indexValue);
                         }else{
                             var request =  $.ajax({
@@ -105,7 +105,7 @@ function getTrackGenre(token) {
                                     var genre = data.genres;
                                     if(genre.length != 0){
                                         trackGenre[trackId] = genre
-                                        console.log(genre)
+                                        // console.log(genre)
                                         addToTrack(genre, this.indexValue);
                                     }else{
                                         genre = ['Unknown']
@@ -121,7 +121,6 @@ function getTrackGenre(token) {
         }
     } 
 
-    console.log(allTracks.length)
 
 }
 
@@ -254,8 +253,9 @@ $(function() {
 		$.when.apply($, deferreds).then(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
+                console.log(allTracks)
                 // console.log(trackGenre);
-                // GetIdLists(total)
+                GetIdLists(total)
                 // $.when.apply($,getFeatures(token)).then(function() {
                 //     // console.log(trackGenre);
                 // });
