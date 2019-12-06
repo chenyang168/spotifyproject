@@ -127,10 +127,31 @@ function addToTrack(data, i) {
 }
 
 
-getFeatures(token){
-    var token = token;
-
+function GetIdLists(total){
+    var oneHundredListNum =  Math.ceil(total / 100); 
+    var index = 1;
+    for (i = oneHundredListNum; i > 0; i--) {
+        if(i!=1){
+            var start = (index - 1)*100;
+            var end = index * 100;
+            GetFeaturesfromIds(allIds.slice(start,end),totalnum)
+            index ++;                        
+        }else{
+            var remainder = totalnum % (100 * index);
+            var start = (index - 1)*100;
+            var end = remainder + start;
+            GetFeaturesfromIds(allIds.slice(start,end),totalnum)
+        }
+      }   
 }
+
+
+
+
+// function getFeatures(token){
+//     var token = token;
+
+// }
 
 
 $(function() {
@@ -151,6 +172,7 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 // console.log(trackGenre);
+                // GetIdLists(total)
                 // $.when.apply($,getFeatures(token)).then(function() {
                 //     // console.log(trackGenre);
                 // });
