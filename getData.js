@@ -176,7 +176,7 @@ function GetFeaturesfromIds(ids,total,token){
                                 if(track_f.id == track_t.id){
                                     track_f['added_at'] = track_t.added_at;
                                     track_f['albumid'] = track_t.albumid;
-                                    track_f['artists'] = track_t.artists;
+                                    track_f['artists'] = track_t.artists[0];
                                     track_f['genre'] = track_t.genre;
                                     track_f['imagehref'] = track_t.imagehref;
                                     track_f['trackName'] = track_t.trackName;
