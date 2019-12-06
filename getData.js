@@ -90,6 +90,32 @@ function getMyTracks(token, pageNo) {
 // }
 // //************************* */
 
+function getTrackGenre() {
+    var deferreds = [];
+    for (var i=0; i<allTracks.length; i++) {
+        var artistId = allTracks[i]['artists'][0]['id'];
+        console.log(artistId)
+        // var searchTerm = allTracks[i]['artists'][0]['name'];
+        // var params = {term:searchTerm};
+        // var request =  $.ajax({
+        //                     url: aristUrl+searchTerm,
+        //                     headers: {
+        //                         "Authorization":"Bearer "+ token,
+        //                     },
+        //                     indexValue: i,
+        //                     method: 'GET',
+        //                     data: jQuery.param(params),
+        //                     dataType: 'json',
+        //                     success: function(data) {
+        //                         var data = data;
+        //                         addToTrack(genres, this.indexValue);
+        //                     }
+        //                 })
+        // deferreds.push(request)
+    } 
+    return deferreds;
+}
+
 
 $(function() {
 	var hash = window.location.hash.substr(1);
@@ -105,12 +131,12 @@ $(function() {
 		for(var i=0; i<Math.ceil(total/50); i++) {
 			deferreds.push(getMyTracks(token, i));
 		}
-		// $.when.apply($, deferreds).then(function() {
-		// 	// console.log(allTracks);
-		// 	$.when.apply($,getTrackGenre()).then(function() {
-		// 		console.log(allTracks);
-		// 	});
-		// })
+		$.when.apply($, deferreds).then(function() {
+			// console.log(allTracks);
+			$.when.apply($,getTrackGenre()).then(function() {
+				// console.log(allTracks);
+			});
+		})
 	})
 
 });
