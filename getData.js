@@ -71,13 +71,15 @@ function data_savedTrack(allItems) {
         oneItem['id'] = item.track.id ;
         oneItem['added_at'] = item.added_at;
         oneItem['artists'] = data_artist(item.track.artists)[0];
-        if(oneItem['artists'].indexOf(',') > -1){
-            oneItem['artists'] = oneItem['artists'].replace(/,/g, " ")
-        }
+        console.log(typeof oneItem['artists'])
+        // if(oneItem['artists'].indexOf(',') > -1){
+        //     oneItem['artists'] = oneItem['artists'].replace(/,/g, " ")
+        // }
         oneItem['trackName'] = item.track.name;
-        if(oneItem['artists'].indexOf(',') > -1){
-            oneItem['trackName'] = oneItem['artists'].replace(/,/g, " ")
-        }
+        console.log(typeof oneItem['trackName'])
+        // if(oneItem['artists'].indexOf(',') > -1){
+        //     oneItem['trackName'] = oneItem['artists'].replace(/,/g, " ")
+        // }
         oneItem['albumid'] = item.track.album.id;
         oneItem['imagehref'] = item.track.album.images[0]['url'];
         oneItem['popularity'] = item.track.popularity
