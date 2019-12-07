@@ -70,7 +70,7 @@ function data_savedTrack(allItems) {
         var comma = ','
         oneItem['id'] = '*' + item.track.id ;
         oneItem['added_at'] = item.added_at;
-        oneItem['artists'] = data_artist(item.track.artists);
+        oneItem['artists'] = data_artist(item.track.artists)[0];
         // if(oneItem['artists'].indexOf(',') > -1){
         //     oneItem['artists'] = oneItem['artists'].replace(/,/g, " ")
         // }
@@ -119,7 +119,7 @@ function getTrackGenre(token) {
     // var deferreds = [];
     var token = token;
     for (var i=0; i<allTracks.length; i++) {
-        var artistId = allTracks[i]['artists'][0]['id'];
+        var artistId = allTracks[i]['artists']['id'];
         var albumId = allTracks[i]['albumid'];
         var trackId = allTracks[i]['id'];
         if (!(trackId in trackGenre)){
@@ -222,7 +222,7 @@ function GetFeaturesfromIds(ids,total,token){
                                 if(track_f.id == track_t.id){
                                     track_f['added_at'] = track_t.added_at;
                                     track_f['albumid'] = track_t.albumid;
-                                    track_f['artists'] = track_t.artists[0].name;
+                                    track_f['artists'] = track_t.artists.name;
                                     track_f['genre'] = track_t.genre;
                                     track_f['imagehref'] = track_t.imagehref;
                                     track_f['trackName'] = track_t.trackName;
