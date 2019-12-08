@@ -114,14 +114,14 @@ function getMyTracks(token, pageNo) {
 }
 
 
-function getTrackGenre(token) {
+function getTrackGenre(token,i) {
     // var deferreds = [];
     var token = token;
-    for (var i=0; i<allTracks.length; i++) {
+    // for (var i=0; i<allTracks.length; i++) {
         var artistId = allTracks[i]['artists']['id'];
         var albumId = allTracks[i]['albumid'];
         var trackId = allTracks[i]['id'];
-        if (!(trackId in trackGenre)){
+        // if (!(trackId in trackGenre)){
             return $.ajax({
             // var request =  $.ajax({
                     url: 'https://api.spotify.com/v1/artists/'+ artistId,
@@ -162,10 +162,10 @@ function getTrackGenre(token) {
                         }
                     }
                 })
-        }else{
-            addToTrack(trackGenre[trackId], i);
-        }
-    } 
+        // }else{
+        //     addToTrack(trackGenre[trackId], i);
+        // }
+    // } 
 
 
 }
@@ -301,13 +301,17 @@ require(['bubbleChart'],function(bubbleChart) {
         var token = result.access_token;
         getTrackNumber(result.access_token).then(function(data) {
             var deferreds = [];
+            var defferreds2 = [];
             var total = data.total;
             for(var i=0; i<Math.ceil(total/50); i++) {
                 deferreds.push(getMyTracks(token, i));
             }
             $.when.apply($, deferreds).then(function() {
                 // console.log(allTracks);
-                $.when.apply($,getTrackGenre(token)).then(function() {
+                for(var i=0; i<total; i++) {
+                    defferreds2.push(getTrackGenre(token, i));
+                }
+                $.when.apply($,defferreds2).then(function() {
                     console.log('should be allTrackdata',allTracks);
                     bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
