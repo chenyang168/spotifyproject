@@ -7,11 +7,11 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(item of data) {
-		if (!(item['genre'] in sumDiction)) {
-			sumDiction[item['genre']] = 0;
+		if (!(item.genre in sumDiction)) {
+			sumDiction[item.genre] = 0;
 		}
-		sumDiction[item['genre']]+=1;
-		console.log(sumDiction, item['genre'] );
+		sumDiction[item.genre]+=1;
+		console.log(sumDiction, item.genre);
 	}
 
 	for(var [key,value] of Object.entries(sumDiction)) {
