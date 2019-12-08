@@ -7,11 +7,11 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(item of data) {
+		console.log('iterate genre',item.genre)
 		if (!(item.genre in sumDiction)) {
 			sumDiction[item.genre] = 0;
 		}
 		sumDiction[item.genre]+=1;
-		console.log(sumDiction, item.genre);
 	}
 
 	for(var [key,value] of Object.entries(sumDiction)) {
@@ -28,8 +28,6 @@ var bubbleChart = function(width, height, selection) {
 				.attr('width',width)
 				.attr('height', height);
 };
-
-
 
 define(function(){
 	var displayGenreChart= function(data) {
