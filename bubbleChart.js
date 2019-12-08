@@ -7,7 +7,7 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(var item of data) {
-		console.log('iterate genre',item.genre)
+		console.log('iterate genre',item, item['genre']);
 		if (!(item.genre in sumDiction)) {
 			sumDiction[item.genre] = 0;
 		}
@@ -41,8 +41,7 @@ define(function(){
 								.data(data).enter().append('circle')
 									.attr('r', function(d) {return 3*d.num});
 			
-			function ticked() {
-				console.log('tick');	
+			function ticked() {	
 			  var u = d3.select('g')
 			    .selectAll('circle')
 			    .data(data)
@@ -60,8 +59,7 @@ define(function(){
 			      return d.y
 			    })
 
-			  u.exit().remove()
-			  console.log(data);
+			  u.exit().remove();
 			};
 		
 		var simulation = function(width, height,data) {
