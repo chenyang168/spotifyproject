@@ -11,7 +11,9 @@ function dealWithData(data) {
 			sumDiction[item.genre] = 0;
 		}
 		sumDiction[item.genre]=sumDiction[item.genre]+1;
+		console.log('one new line');
 	}
+	console.log(sumDiction);
 	for(var [key,value] of Object.entries(sumDiction)) {
 		sumlst.push({name:key, num:value});
 	}
@@ -32,37 +34,7 @@ var bubbleChart = function(width, height, selection) {
 define(function(){
 	var displayGenreChart= function(data) {
 		var width = window.innerWidth, height = window.innerHeight;
-		// var data = [
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 2', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 54', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'dance'},
-		// 	{name: 'name 1', genre: 'dance'},
-		// 	{name: 'name 1', genre: 'dance'},
-		// 	{name: 'name 1', genre: 'dance'},
-		// 	{name: 'name 1', genre: 'rock'},
-		// 	{name: 'name 1', genre: 'rock'},
-		// 	{name: 'name 1', genre: 'rock'},
-		// 	{name: 'name 1', genre: 'rock'},
-		// 	{name: 'name 1', genre: 'abc'},
-		// 	{name: 'name 1', genre: 'abc'},
-		// 	{name: 'name 1', genre: 'abc'},
-		// 	{name: 'name 1', genre: 'abc'},
-		// 	{name: 'name 1', genre: 'metal'},
-		// 	{name: 'name 1', genre: 'metal'},
-		// 	{name: 'name 1', genre: 'metal'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'},
-		// 	{name: 'name 1', genre: 'pop'}
-		// ];
+		
 			var chart = bubbleChart(width,height,'#genreChart');
 			var data = dealWithData(data);
 			console.log('printdata',data);
