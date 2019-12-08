@@ -305,9 +305,11 @@ require(['bubbleChart'],function(bubbleChart) {
             $.when.apply($, deferreds).then(function() {
                 // console.log(allTracks);
                 $.when.apply($,getTrackGenre(token)).then(function() {
+                    console.log('should be allTrackdata',allTracks);
+                    bubbleChart.displayGenreChart(finalData);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
-                        bubbleChart.displayGenreChart(finalData);
-                        console.log('should be finaldata',finalData);
+                        
+
                     });
                 });
             })
