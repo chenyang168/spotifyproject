@@ -286,32 +286,35 @@ function downloadCSV(args, newData ) {
     link.click();
 }
 
-
-$(function() {
-	var hash = window.location.hash.substr(1);
-	var result = hash.split('&').reduce(function (result, item) {
-    var parts = item.split('=');
-    result[parts[0]] = parts[1];
-    return result;
-	}, {});
-	var token = result.access_token;
-	getTrackNumber(result.access_token).then(function(data) {
-		var deferreds = [];
-		var total = data.total;
-		for(var i=0; i<Math.ceil(total/50); i++) {
-			deferreds.push(getMyTracks(token, i));
-		}
-		$.when.apply($, deferreds).then(function() {
-			// console.log(allTracks);
-			$.when.apply($,getTrackGenre(token)).then(function() {
-                $.when.apply($,GetIdLists(total,token)).then(function() {
-                    displayGenreChart(finalData);
+//add require module
+require(['bubbleChart'],function(bubbleChart) {
+    $(function() {
+        var hash = window.location.hash.substr(1);
+        var result = hash.split('&').reduce(function (result, item) {
+        var parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+        }, {});
+        var token = result.access_token;
+        getTrackNumber(result.access_token).then(function(data) {
+            var deferreds = [];
+            var total = data.total;
+            for(var i=0; i<Math.ceil(total/50); i++) {
+                deferreds.push(getMyTracks(token, i));
+            }
+            $.when.apply($, deferreds).then(function() {
+                // console.log(allTracks);
+                $.when.apply($,getTrackGenre(token)).then(function() {
+                    $.when.apply($,GetIdLists(total,token)).then(function() {
+                        bubbleChart.displayGenreChart(finalData);
+                    });
                 });
-			});
-		})
-	})
+            })
+        })
 
+    });
 });
+
 
 
 
