@@ -306,7 +306,7 @@ require(['bubbleChart'],function(bubbleChart) {
                 // console.log(allTracks);
                 $.when.apply($,getTrackGenre(token)).then(function() {
                     console.log('should be allTrackdata',allTracks);
-                    bubbleChart.displayGenreChart(finalData);
+                    bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
                         
 
