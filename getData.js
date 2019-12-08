@@ -230,8 +230,13 @@ function GetFeaturesfromIds(ids,total,token){
                             }
                         }
                     
-                    console.log(finalData);
+//                     console.log(finalData);
+			    for (item in finalData){
+				    console.log(item.genre)
+			    }
+		
                     downloadCSV({ filename: "stock-data.csv" },finalData)
+			    
                  
                     }
                 }
