@@ -146,9 +146,9 @@ function getTrackGenre(token) {
                                 method: 'GET',
                                 dataType: 'json',
                                 success: function(data) {
-                                    var genre = data.genres;
+                                    var genre = data.genres;//[]
                                     if(genre.length != 0){
-                                        trackGenre[trackId] = genre
+                                        trackGenre[trackId] = genre//[]
                                         // console.log(genre)
                                         addToTrack(genre, this.indexValue);
                                     }else{
@@ -171,8 +171,9 @@ function getTrackGenre(token) {
 
 function addToTrack(data, i) {   
     if(i<allTracks.length){
-        allTracks[i]['genre'] = data[0];
+        allTracks[i].genre = data[0];
     }
+    console.log(typeof(allTracks[i].genre));
 }
 
 function GetIdLists(total,token){
