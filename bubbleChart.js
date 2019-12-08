@@ -7,12 +7,12 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(var i=0; i<data.length; i++) {
-		console.log(data)
-		console.log('iterate genre',item, item['genre'], item.trackName, item.popularity);
-		if (!(item.genre in sumDiction)) {
-			sumDiction[item.genre] = 0;
+		// console.log(data)
+		console.log('iterate genre',data[i].genre);
+		if (!(data[i].genre in sumDiction)) {
+			sumDiction[data[i].genre] = 0;
 		}
-		sumDiction[item.genre]+=1;
+		sumDiction[data[i].genre]+=1;
 	}
 
 	for(var [key,value] of Object.entries(sumDiction)) {
