@@ -7,7 +7,7 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(var item of data) {
-		console.log('iterate genre',item, item['genre'], item.genre);
+		console.log('iterate genre',item, item['trackName'], item.trackName, item.popularity);
 		if (!(item.genre in sumDiction)) {
 			sumDiction[item.genre] = 0;
 		}
