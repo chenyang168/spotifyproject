@@ -130,9 +130,6 @@ function addToTrack(data, i) {
     }
 }
 
-
-
-
 function GetIdLists(total,token){
     var oneHundredListNum =  Math.ceil(total / 100); 
     var index = 1;
@@ -263,6 +260,7 @@ $(function() {
 			// console.log(allTracks);
 			$.when.apply($,getTrackGenre(token)).then(function() {
                 $.when.apply($,GetIdLists(total,token)).then(function() {
+                    displayGenreChart(finalData);
                 });
 			});
 		})
