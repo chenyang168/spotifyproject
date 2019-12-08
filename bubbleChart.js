@@ -15,6 +15,7 @@ function dealWithData(data) {
 	for(var [key,value] of Object.entries(sumDiction)) {
 		sumlst.push({name:key, num:value});
 	}
+	console.log('bubbleChart data', sumlst);
 	return sumlst;
 }
 
@@ -64,7 +65,7 @@ define(function(){
 		// ];
 			var chart = bubbleChart(width,height,'#genreChart');
 			var data = dealWithData(data);
-			console.log(data);
+			console.log('printdata',data);
 			var bubbles = chart.append('g')
 								.selectAll('circle')
 								.data(data).enter().append('circle')
