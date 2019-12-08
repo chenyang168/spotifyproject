@@ -106,6 +106,9 @@ define(function(){
 			return simulation;
 		};
 		simulation(width, height, data);
-	}
+	};
+	return {
+		displayGenreChart:displayGenreChart
+	};
 })
 
