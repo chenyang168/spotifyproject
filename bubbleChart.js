@@ -7,13 +7,13 @@ function dealWithData(data) {
 	sumDiction = {};
 	sumlst = [];
 	for(item of data) {
-		if (!(item.genre in sumDiction)) {
-			sumDiction[item.genre] = 0;
+		if (!(item['genre'] in sumDiction)) {
+			sumDiction[item['genre']] = 0;
 		}
-		sumDiction[item.genre]=sumDiction[item.genre]+1;
-		console.log('one new line');
+		sumDiction[item['genre']]+=1;
+		console.log(sumDiction, item['genre'] );
 	}
-	console.log(sumDiction);
+
 	for(var [key,value] of Object.entries(sumDiction)) {
 		sumlst.push({name:key, num:value});
 	}
@@ -41,7 +41,7 @@ define(function(){
 			var bubbles = chart.append('g')
 								.selectAll('circle')
 								.data(data).enter().append('circle')
-									.attr('r', function(d) {return 10*d.num});
+									.attr('r', function(d) {return 3*d.num});
 			
 			function ticked() {
 				console.log('tick');	
@@ -73,7 +73,7 @@ define(function(){
 						.force("center", d3.forceCenter().x(width * .5).y(height * .5))
 						.force("charge", d3.forceManyBody().strength(-15))
 						.force('collision', d3.forceCollide().radius(function(d) {
-						    return 10*d.num
+						    return 3*d.num
 						  }))
 						.on('tick', ticked);
 			return simulation;
