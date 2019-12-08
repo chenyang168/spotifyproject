@@ -122,7 +122,8 @@ function getTrackGenre(token) {
         var albumId = allTracks[i]['albumid'];
         var trackId = allTracks[i]['id'];
         if (!(trackId in trackGenre)){
-            var request =  $.ajax({
+            return $.ajax({
+            // var request =  $.ajax({
                     url: 'https://api.spotify.com/v1/artists/'+ artistId,
                     headers: {
                         "Authorization":"Bearer "+ token,
@@ -137,6 +138,7 @@ function getTrackGenre(token) {
                             // console.log(genre)
                             addToTrack(genre, this.indexValue);
                         }else{
+                            console.log('another method');
                             var request =  $.ajax({
                                 url: 'https://api.spotify.com/v1/albums/'+ albumId,
                                 headers: {
@@ -173,7 +175,7 @@ function addToTrack(data, i) {
     if(i<allTracks.length){
         allTracks[i].genre = data[0];
     }
-    console.log(typeof(allTracks[i].genre));
+    console.log(i,typeof(allTracks[i].genre));
 }
 
 function GetIdLists(total,token){
@@ -309,8 +311,6 @@ require(['bubbleChart'],function(bubbleChart) {
                     console.log('should be allTrackdata',allTracks);
                     bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
-                        
-
                     });
                 });
             })
