@@ -313,6 +313,9 @@ require(['bubbleChart'],function(bubbleChart) {
         })
 
     });
+    return {
+        bubbleChart:bubbleChart
+    };
 });
 
 

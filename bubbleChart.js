@@ -107,5 +107,5 @@ define(function(){
 		};
 		simulation(width, height, data);
 	}
-});
+})
 
