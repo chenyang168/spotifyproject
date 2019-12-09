@@ -227,14 +227,12 @@ function GetFeaturesfromIds(ids,total,token){
                                     track_f['trackName'] = track_t.trackName;
                                     track_f['popularity'] = track_t.popularity;
 
-                                    if (track_f['danceability']< 0.33){
-                                        track_f['danceability_filter'] = 'low'
-                                    };
-                                    if (0.33 < track_f['danceability'] < 0.66){
-                                        track_f['danceability_filter'] = 'medium'
-                                    };
-                                    if( track_f['danceability'] > 0.66){
-                                        track_f['danceability_filter'] = 'high'
+                                    if (track_f.danceability < 0.33){
+                                        track_f['danceability_filter'] = 'low' ;
+                                    } else if (0.33 < track_f.danceability < 0.66){
+                                        track_f['danceability_filter'] = 'medium' ;
+                                    } else {
+                                        track_f['danceability_filter'] = 'high';
                                     };
 
                                 }
