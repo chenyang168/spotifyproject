@@ -12,38 +12,38 @@ var finalData = [];
 
 //dummy data
 var filterOptions = ["all","all","all"]
-var allGenres = ['Genre1','Genre2', 'Genre3']
-var allGenders = ['Male','Female']
 var allVals = ['High','Meidum','Low']
 
-var fakefinalData = [   {'Name': 'Chen', 'Gender': 'Male', 'Birthday': '11/25/1991','Genre': 'Genre1'},
-                        {'Name': 'CHEN', 'Gender': 'Female', 'Birthday': '1/2/1992','Genre': 'Genre2'},
-                        {'Name': 'NNNN', 'Gender': 'Male', 'Birthday': '11/5/1993','Genre': 'Genre3'},
-]
-var tracklist_chen = ``
-for (fakeitem of fakefinalData){
-    tracklist_chen += `
-    <li class = 'listitem hide rank${fakefinalData.indexOf(fakeitem)} ${fakeitem.Genre} ${fakeitem.Gender}'> ${fakeitem.Genre}, ${fakeitem.Name}, ${fakeitem.Gender}, ${fakeitem.Birthday} </li> `
-    }
-document.getElementById("tracklist_chen").innerHTML = tracklist_chen
+// var allGenres = ['Genre1','Genre2', 'Genre3']
+// var allGenders = ['Male','Female']
+// var fakefinalData = [   {'Name': 'Chen', 'Gender': 'Male', 'Birthday': '11/25/1991','Genre': 'Genre1'},
+//                         {'Name': 'CHEN', 'Gender': 'Female', 'Birthday': '1/2/1992','Genre': 'Genre2'},
+//                         {'Name': 'NNNN', 'Gender': 'Male', 'Birthday': '11/5/1993','Genre': 'Genre3'},
+// ]
+// var tracklist_chen = ``
+// for (fakeitem of fakefinalData){
+//     tracklist_chen += `
+//     <li class = 'listitem hide rank${fakefinalData.indexOf(fakeitem)} ${fakeitem.Genre} ${fakeitem.Gender}'> ${fakeitem.Genre}, ${fakeitem.Name}, ${fakeitem.Gender}, ${fakeitem.Birthday} </li> `
+//     }
+// document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 
-// genre filter
-var genrelist = ` <button class="btn active" onclick="filterGenre('all')">all</button>`
-for (genre of allGenres){
-    genrelist += `
-        <button class="btn" onclick="filterGenre('${genre}')">${genre}</button>
+// valence filter
+var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
+for (val of allVals){
+    valencelist += `
+        <button class="btn" onclick="filterValence('${val}')">${val}</button>
     `
 }
-document.getElementById('GenreDropdown').innerHTML = genrelist
+document.getElementById('ValenceDropdown').innerHTML = valencelist
 
-// gender filter
-var genderlist = ` <button class="btn active" onclick="filterGender('all')">all</button>`
-for (gender of allGenders){
-    genderlist += `
-        <button class="btn" onclick="filterGender('${gender}')">${gender}</button>
+// energy filter
+var energylist = ` <button class="btn active" onclick="filterEnergy('all')">all</button>`
+for (val of allVals){
+    energylist += `
+        <button class="btn" onclick="filterEnergy('${val}')">${val}</button>
     `
 }
-document.getElementById('GenderDropdown').innerHTML = genderlist
+document.getElementById('EnergyDropdown').innerHTML = energylist
 
 // danceability filter
 var danceabilitylist = ` <button class="btn active" onclick="filterDanceability('all')">all</button>`
@@ -55,11 +55,15 @@ for (val of allVals){
 document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
 
 
-filterGenre("all")
-function filterGenre(c) {
+filterValence("all")
+function filterValence(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
-    if (c == "all") c = "";
+    c = 'valence'+ c
+    if (c == "all") {c = ""
+    } else {   
+        c = 'valence'+c
+    };
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(0,1,c);
@@ -67,11 +71,15 @@ function filterGenre(c) {
     }
 }
 
-filterGender("all")
-function filterGender(c) {
+filterEnergy("all")
+function filterEnergy(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
-    if (c == "all") c = "";
+    c = 'energy'+ c
+    if (c == "all") {c = ""
+    }else {
+        c = 'energy'+c
+    };
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(1,2,c);
@@ -84,7 +92,10 @@ function filterDanceability(c) {
     console.log(1)
     var x, i;
     x = document.getElementsByClassName("listitem");
-    if (c == "all") c = "";
+    if (c == "all") {c = ""
+    }else{
+        c = 'dance'+c
+    };
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(2,3,c);
@@ -158,7 +169,8 @@ for (var i = 0; i < btns.length; i++){
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
-        <li class = 'listitem hide ${item.danceability_filter} ${item.energy_filter} ${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> `
+        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
+        `
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
