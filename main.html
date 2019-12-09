@@ -3,20 +3,57 @@
 <head>
 	<meta charset="utf-8">
 	<title>main page</title>
-	<script src="https://d3js.org/d3-color.v1.min.js"></script>
-	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-	<script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src=https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js></script>
+	<style>
+		.hide {
+			display: none;
+		}
 
-	<script src="require.js" data-main="getData"></script>
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f6f6f6;
+			opacity: 80%;
+			min-width: 230px;
+			overflow: auto;
+			border: 1px solid #ddd;
+			z-index: 1;
+		}
+		.dropdown-content button {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+		.show {
+			display: block;
+		}
+		.btn {
+			border: none;
+			outline: none;
+			padding: 12px 16px;
+			background-color: #f1f1f1;
+			cursor: pointer;
+		}
+		.btn.active {
+			background-color: #666;
+			color: white;
+		}
+
+
+		</style>
 </head>
+
 <body>
 
-	<div id = "alldata"></div>
+	<div id = "alldata"> </div>
 
-	<h1> Spotify Project222 </h1>
+	<h1> Spotify Project </h1>
 
 
 	<div id = "genre"> 
@@ -48,8 +85,35 @@
 		<div class = 'description'>
 			<p>This part for Chen</p>
 		</div>
-		<div id = 'customizeChart'></div>
-	</div>
+		<div id = 'customizeChart'>
 
+			<div class="dropdown genre">
+				<button  class="dropbtn GenreDropdown">Genre</button>
+				<div id = 'GenreDropdown' class="dropdown-content"> 
+
+				</div>
+			</div>
+
+			<div class="dropdown gender">
+				<button class="dropbtn GenderDropdown">Gender</button>
+				<div id = 'GenderDropdown' class="dropdown-content"> 
+
+				</div>
+			</div>
+
+			<div class="dropdown danceability">
+				<button class="dropbtn DanceabilityDropdown">Danceability</button>
+				<div id = 'DanceabilityDropdown' class="dropdown-content"> 
+
+				</div>
+			</div>
+
+			<div>
+				<ul id = 'tracklist_chen'>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src='getData.js'></script>
 </html>
