@@ -220,9 +220,7 @@ function GetFeaturesfromIds(ids,total,token){
                             
                             if ((track_f.danceability < 0.33)){
                                 track_f['danceability_filter'] = 'low'
-                            } else if ((0.33 < track_f.danceability < 0.66)){
-                                track_f['danceability_filter'] = 'medium'
-                            }else{
+                            } else{
                                 track_f['danceability_filter'] = 'high'
                             }
                             
