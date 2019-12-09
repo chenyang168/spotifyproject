@@ -217,6 +217,15 @@ function GetFeaturesfromIds(ids,total,token){
                     finalData = finalData.concat(data.audio_features)
                     if(finalData.length == total){
                         for(track_f of finalData){
+                            if ((track_f.danceability < 0.5)){
+                                console.log(111)
+                                track_f['danceability_filter'] = 'low'
+                            } else{
+                                console.log(333)
+                                track_f['danceability_filter'] = 'high'
+                            }
+                            console.log(track_f.danceability)
+                            
                             for (track_t of allTracks){
                                 if(track_f.id == track_t.id){
                                     track_f['added_at'] = track_t.added_at;
@@ -230,15 +239,10 @@ function GetFeaturesfromIds(ids,total,token){
                             }
                         }
                     
-                    console.log(track_f.danceability)
 
-                    if ((track_f.danceability < 0.5)){
-                        console.log(111)
-                        track_f['danceability_filter'] = 'low'
-                    } else{
-                        console.log(333)
-                        track_f['danceability_filter'] = 'high'
-                    }
+
+
+
                     
                     downloadCSV({ filename: "stock-data.csv" },finalData)
                     for (item of finalData){
