@@ -236,7 +236,13 @@ function GetFeaturesfromIds(ids,total,token){
                                     // };
 
                                     console.log(track_f.danceability)
-                                    console.log(track_f)
+                                    console.log(track_f.danceability < 0.33)
+                                    console.log((track_f.danceability < 0.33))
+                                    if ((track_f.danceability < 0.33)){
+                                        console.log(111)
+                                        track_f['danceability_filter'] = 'low'
+                                    }
+                                    // console.log(track_f)
                                     
 
                                 }
@@ -329,6 +335,7 @@ require(['bubbleChart'],function(bubbleChart) {
                     console.log('should be allTrackdata',allTracks);
                     bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
+
                     });
                 });
             })
