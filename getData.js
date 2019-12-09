@@ -449,7 +449,7 @@ function downloadCSV(args, newData ) {
 }
 
 //add require module
-require(['bubbleChart'],function(bubbleChart) {
+// require(['bubbleChart'],function(bubbleChart) {
     $(function() {
         var hash = window.location.hash.substr(1);
         var result = hash.split('&').reduce(function (result, item) {
@@ -482,7 +482,7 @@ require(['bubbleChart'],function(bubbleChart) {
 
     });
     
-});
+// });
 
 
 
