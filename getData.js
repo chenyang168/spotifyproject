@@ -217,6 +217,15 @@ function GetFeaturesfromIds(ids,total,token){
                     finalData = finalData.concat(data.audio_features)
                     if(finalData.length == total){
                         for(track_f of finalData){
+                            
+                            if ((track_f.danceability < 0.33)){
+                                track_f['danceability_filter'] = 'low'
+                            } else if ((0.33 < track_f.danceability && track_f.danceability < 0.66)){
+                                track_f['danceability_filter'] = 'medium'
+                            }else{
+                                track_f['danceability_filter'] = 'high'
+                            }
+                            
                             for (track_t of allTracks){
                                 if(track_f.id == track_t.id){
                                     track_f['added_at'] = track_t.added_at;
@@ -230,9 +239,15 @@ function GetFeaturesfromIds(ids,total,token){
                             }
                         }
                     
-                    console.log(finalData);
+
+
+
+
+                    
                     downloadCSV({ filename: "stock-data.csv" },finalData)
-                 
+                    for (item of finalData){
+                        console.log(item)
+                    }          
                     }
                 }
             });
@@ -315,6 +330,7 @@ require(['bubbleChart'],function(bubbleChart) {
                     console.log('should be allTrackdata',allTracks);
                     bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
+
                     });
                 });
             })
