@@ -16,10 +16,25 @@ function dealWithData(data) {
 	}
 
 	for(var [key,value] of Object.entries(sumDiction)) {
-		sumlst.push({name:key, num:value});
+		if(key!=='undefined') {
+			sumlst.push({name:key, num:value});
+		}
 	}
 	console.log('bubbleChart data', sumlst);
 	return sumlst;
+}
+
+function getMinMax(data) {
+	var max=0, min=0;
+	for(item of data) {
+		if(item.num>max) {
+			max=item.num
+		}
+		if(item.num<min) {
+			min=item.num
+		}
+	}
+	return [min,max];
 }
 
 var bubbleChart = function(width, height, selection) {
@@ -32,36 +47,42 @@ var bubbleChart = function(width, height, selection) {
 
 define(function(){
 	var displayGenreChart= function(data) {
-		var width = window.innerWidth, height = window.innerHeight;
+		var width = window.innerWidth, height = 2000;
 		
-			var chart = bubbleChart(width,height,'#genreChart');
-			var data = dealWithData(data);
-			console.log('printdata',data);
-			var bubbles = chart.append('g')
-								.selectAll('circle')
-								.data(data).enter().append('circle')
-									.attr('r', function(d) {return 3*d.num});
+		var chart = bubbleChart(width,height,'#genreChart');
+		var data = generateData();
+		var dataLength = data.length;
+		var domain = getMinMax(data);
+		var customScale = d3.scaleLinear().domain(domain).range([1,85]);
+		var customScaleForColor = d3.scaleLinear().domain([0,dataLength-1]).range([0,1]);
+		// var customColor = d3.scaleSequential(function()).domain().range([0,1]);
+		var eachBlock = chart.selectAll('g circleText')
+								.data(data).enter().append('g');
+									// .attr('r', function(d) {return customScale(d.num)});
+		var bubble = eachBlock.append('circle')
+								.attr('r', function(d) {return customScale(d.num)})
+								.attr('fill', function(d,i) {return d3.interpolateRainbow(customScaleForColor(i))});
+								// .attr('fill', 'none')
+								// .attr('stroke','blue');
+		var text = eachBlock.append('text').text(function(d) {return d.name})
+								.attr('dx', '-5')
+								.attr('fill','white')
 			
-			function ticked() {	
-			  var u = d3.select('g')
-			    .selectAll('circle')
-			    .data(data)
+		function ticked() {	
+		  var u = d3.select('svg')
+		    .selectAll('g')
+		    .data(data)
 
-			  u.enter()
-			    .append('circle')
-			    .attr('r', function(d) {
-			      return 10*d.num
-			    })
-			    .merge(u)
-			    .attr('cx', function(d) {
-			      return d.x
-			    })
-			    .attr('cy', function(d) {
-			      return d.y
-			    })
+		  u.enter()
+		    .append('circle')
+		    .merge(u)
+		    .attr('transform', function(d) {
+		      return 'translate('+d.x+','+d.y+')'
+		    })
+		    
 
-			  u.exit().remove();
-			};
+		  u.exit().remove();
+		};
 		
 		var simulation = function(width, height,data) {
 			var simulation =  d3.forceSimulation(data)
@@ -70,7 +91,7 @@ define(function(){
 						.force("center", d3.forceCenter().x(width * .5).y(height * .5))
 						.force("charge", d3.forceManyBody().strength(-15))
 						.force('collision', d3.forceCollide().radius(function(d) {
-						    return 3*d.num
+						    return customScale(d.num)
 						  }))
 						.on('tick', ticked);
 			return simulation;
