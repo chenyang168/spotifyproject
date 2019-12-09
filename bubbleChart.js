@@ -50,7 +50,6 @@ define(function(){
 		var width = window.innerWidth, height = 2000;
 		
 		var chart = bubbleChart(width,height,'#genreChart');
-		var data = generateData();
 		var dataLength = data.length;
 		var domain = getMinMax(data);
 		var customScale = d3.scaleLinear().domain(domain).range([1,85]);
