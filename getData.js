@@ -10,44 +10,6 @@ var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
 var finalData = [];
 
-// //dummy data
-// var allGenres = ['Genre1','Genre2', 'Genre3']
-// var fakefinalData = [   {'Name': 'Chen', 'Gender': 'Male', 'Birthday': '11/25/1991'},
-//                         {'Name': 'CHEN', 'Gender': 'Female', 'Birthday': '1/2/1992'},
-//                         {'Name': 'NNNN', 'Gender': 'Unisex', 'Birthday': '11/5/1993'},
-// ]
-// var tracklist_chen = ``
-// for (fakeitem of fakefinalData){
-//     tracklist_chen += `
-//     <li class = 'listitem rank${fakefinalData.indexOf(fakeitem)}'> ${fakeitem.Name}, ${fakeitem.Gender}, ${fakeitem.Birthday} </li> `
-//     }
-// document.getElementById("tracklist_chen").innerHTML = tracklist_chen
-
-// var genrelist = ``
-// for (genre of allGenres){
-//     genrelist += `
-//         <button onclick="filterSelection('${genre}')">${genre}</button>
-//     `
-// }
-// document.getElementById('myDropdown').innerHTML = genrelist
-
-// function filterSelection(item){
-//     console.log(item)
-// }
-
-// function dropDown(){
-//     document.getElementById("myDropdown").classList.toggle("show");
-// }
-
-// function myFunction(){
-//     var hide = document.getElementsByClassName('rank1')[0]
-//     hide.classList.add("hide")
-//     console.log(hide)
-// }
-// //dummy data end
-
-
-
 
 function getTrackNumber(token) {
 	var params = {'offset':0, 'limit': 50};
@@ -224,7 +186,23 @@ function GetFeaturesfromIds(ids,total,token){
                                 track_f['danceability_filter'] = 'medium'
                             }else{
                                 track_f['danceability_filter'] = 'high'
-                            }
+                            }; 
+
+                            if ((track_f.energy < 0.33)){
+                                track_f['energy_filter'] = 'low'
+                            } else if ((0.33 < track_f.energy && track_f.energy < 0.66)){
+                                track_f['energy_filter'] = 'medium'
+                            }else{
+                                track_f['energy_filter'] = 'high'
+                            }; 
+                            
+                            if ((track_f.valence < 0.33)){
+                                track_f['valence_filter'] = 'low'
+                            } else if ((0.33 < track_f.valence && track_f.valence < 0.66)){
+                                track_f['valence_filter'] = 'medium'
+                            }else{
+                                track_f['valence_filter'] = 'high'
+                            }; 
                             
                             for (track_t of allTracks){
                                 if(track_f.id == track_t.id){
@@ -238,12 +216,7 @@ function GetFeaturesfromIds(ids,total,token){
                                 }
                             }
                         }
-                    
-
-
-
-
-                    
+        
                     downloadCSV({ filename: "stock-data.csv" },finalData)
                     for (item of finalData){
                         console.log(item)
