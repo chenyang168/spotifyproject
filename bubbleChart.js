@@ -52,7 +52,7 @@ define(function(){
 		var chart = bubbleChart(width,height,'#genreChart');
 		var dataLength = data.length;
 		var domain = getMinMax(data);
-		var customScale = d3.scaleLinear().domain(domain).range([1,85]);
+		var customScale = d3.scaleLinear().domain(domain).range([2,200]);
 		var customScaleForColor = d3.scaleLinear().domain([0,dataLength-1]).range([0,1]);
 		// var customColor = d3.scaleSequential(function()).domain().range([0,1]);
 		var eachBlock = chart.selectAll('g circleText')
@@ -65,7 +65,7 @@ define(function(){
 								// .attr('stroke','blue');
 		var text = eachBlock.append('text').text(function(d) {return d.name})
 								.attr('dx', '-5')
-								.attr('fill','white')
+								.attr('fill','black')
 			
 		function ticked() {	
 		  var u = d3.select('svg')
