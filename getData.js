@@ -168,6 +168,7 @@ for (var i = 0; i < btns.length; i++){
 }
 });
 
+var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
