@@ -48,7 +48,7 @@ var bubbleChart = function(width, height, selection) {
 define(function(){
 	var displayGenreChart= function(data) {
 		var width = window.innerWidth, height = 2000;
-		
+		var data = dealWithData(data);
 		var chart = bubbleChart(width,height,'#genreChart');
 		var dataLength = data.length;
 		var domain = getMinMax(data);
