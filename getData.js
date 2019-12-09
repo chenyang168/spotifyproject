@@ -11,6 +11,7 @@ var idsUrl =  'https://api.spotify.com/v1/audio-features';
 var finalData = [];
 
 //dummy data
+$(function() {
 var filterOptions = ["all","all","all"]
 var allVals = ['High','Meidum','Low']
 
@@ -28,6 +29,7 @@ var allVals = ['High','Meidum','Low']
 // document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 
 // valence filter
+
 var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
     valencelist += `
@@ -164,7 +166,7 @@ for (var i = 0; i < btns.length; i++){
         this.className += " active";
       });
 }
-
+});
 
 function GenerateList(DataDict){
     for (item of DataDict){
@@ -449,7 +451,7 @@ function downloadCSV(args, newData ) {
 }
 
 //add require module
-// require(['bubbleChart'],function(bubbleChart) {
+require(['bubbleChart'],function(bubbleChart) {
     $(function() {
         var hash = window.location.hash.substr(1);
         var result = hash.split('&').reduce(function (result, item) {
@@ -482,7 +484,7 @@ function downloadCSV(args, newData ) {
 
     });
     
-// });
+});
 
 
 
