@@ -226,18 +226,21 @@ function GetFeaturesfromIds(ids,total,token){
                                     track_f['imagehref'] = track_t.imagehref;
                                     track_f['trackName'] = track_t.trackName;
                                     track_f['popularity'] = track_t.popularity;
+                                    if (track_f['danceability']< 0.33){
+                                        track_f['danceability_filter'] = 'low'
+                                    }else if (0.33<track_f['danceability']< 0.66){
+                                        track_f['danceability_filter'] = 'medium'
+                                    }else{
+                                        track_f['danceability_filter'] = 'high'
+                                    }
                                 }
                             }
                         }
                     
-//                     console.log(finalData);
-			    for (item in finalData){
-				    console.log(item.genre)
-			    }
-		
                     downloadCSV({ filename: "stock-data.csv" },finalData)
-			    
-                 
+                    for (item of finalData){
+                        console.log(item.genre)
+                    }          
                     }
                 }
             });
