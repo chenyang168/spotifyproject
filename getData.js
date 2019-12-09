@@ -226,26 +226,19 @@ function GetFeaturesfromIds(ids,total,token){
                                     track_f['imagehref'] = track_t.imagehref;
                                     track_f['trackName'] = track_t.trackName;
                                     track_f['popularity'] = track_t.popularity;
-
-                                    console.log(track_f.danceability)
-
-                                    if ((track_f.danceability < 0.33)){
-                                        console.log(111)
-                                        track_f['danceability_filter'] = 'low'
-                                    }
-                                    if ((0.33 < track_f.danceability < 0.66)){
-                                        console.log(222)
-                                        track_f['danceability_filter'] = 'medium'
-                                    }
-                                    if ((0.66 < track_f.danceability)){
-                                        console.log(333)
-                                        track_f['danceability_filter'] = 'high'
-                                    }
-                                    
-
                                 }
                             }
                         }
+                    
+                    console.log(track_f.danceability)
+
+                    if ((track_f.danceability < 0.5)){
+                        console.log(111)
+                        track_f['danceability_filter'] = 'low'
+                    } else{
+                        console.log(333)
+                        track_f['danceability_filter'] = 'high'
+                    }
                     
                     downloadCSV({ filename: "stock-data.csv" },finalData)
                     for (item of finalData){
