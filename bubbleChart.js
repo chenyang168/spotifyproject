@@ -79,8 +79,6 @@ define(function(){
 		    	console.log(d.x,d.y);
 		    	return 'translate('+d.x+','+d.y+')'
 		    })
-		    
-
 		  u.exit().remove();
 		};
 		
