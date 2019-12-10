@@ -63,10 +63,10 @@ function filterValence(c) {
 filterEnergy("all")
 function filterEnergy(c) {
     if (c == "all") {
-        filterOptions.splice(1,2,c);
+        filterOptions.splice(1,1,c);
     }else {
         c = 'energy'+c
-        filterOptions.splice(1,2,c);
+        filterOptions.splice(1,1,c);
     };
     console.log(c) 
     filterSelection(filterOptions)
@@ -76,10 +76,10 @@ function filterEnergy(c) {
 filterDanceability("all")
 function filterDanceability(c) {
     if (c == "all") {
-        filterOptions.splice(2,3,c);
+        filterOptions.splice(2,1,c);
     }else{
         c = 'dance'+c
-        filterOptions.splice(2,3,c);
+        filterOptions.splice(2,1,c);
     };
     console.log(c) 
     filterSelection(filterOptions)
@@ -140,9 +140,9 @@ for (item of dropdown){
 var vbtns = document.getElementsByClassName("vbtn");
 for (var i = 0; i < vbtns.length; i++){
     vbtns[i].addEventListener("click", function(){
-        var current = document.querySelectorAll('.active,.vbtn')
-        // document.getElementsByClassName("active");
+        var current = document.getElementsByClassName('vbtn active')
         console.log(current)
+        console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
@@ -151,8 +151,9 @@ for (var i = 0; i < vbtns.length; i++){
 var ebtns = document.getElementsByClassName("ebtn");
 for (var i = 0; i < ebtns.length; i++){
     ebtns[i].addEventListener("click", function(){
-        var current = document.querySelectorAll('.active,.ebtn')
+        var current = document.getElementsByClassName('ebtn active')
         console.log(current)
+        console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
@@ -162,8 +163,9 @@ for (var i = 0; i < ebtns.length; i++){
 var dbtns = document.getElementsByClassName("dbtn");
 for (var i = 0; i < dbtns.length; i++){
     dbtns[i].addEventListener("click", function(){
-        var current = document.querySelectorAll('.active,.dbtn')
+        var current = document.getElementsByClassName('dbtn active')
         console.log(current)
+        console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
