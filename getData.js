@@ -32,12 +32,12 @@ function GenerateList(DataDict){
             </div>
         </div> 
         `
-        var valencedata = (item.valence * 100).toFixed(2) + '%'
-        var energydata = (item.energy * 100).toFixed(2) + '%'
-        var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
-        document.getElementById('valence').style.width = valencedata
-        document.getElementById('energy').style.width = energydata
-        document.getElementById('danceability').style.width = danceabilitydata
+        // var valencedata = (item.valence * 100).toFixed(2) + '%'
+        // var energydata = (item.energy * 100).toFixed(2) + '%'
+        // var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
+        // document.getElementById('valence').style.width = valencedata
+        // document.getElementById('energy').style.width = energydata
+        // document.getElementById('danceability').style.width = danceabilitydata
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
@@ -76,7 +76,7 @@ function filterValence(c) {
         c = 'valence'+c
         filterOptions.splice(0,1,c);
     };
-    console.log(c)
+    // console.log(c)
     filterSelection(filterOptions)
 }
 
@@ -87,7 +87,7 @@ function filterEnergy(c) {
         c = 'energy'+c
         filterOptions.splice(1,1,c);
     };
-    console.log(c) 
+    // console.log(c) 
     filterSelection(filterOptions)
     
 }
@@ -99,7 +99,7 @@ function filterDanceability(c) {
         c = 'dance'+c
         filterOptions.splice(2,1,c);
     };
-    console.log(c) 
+    // console.log(c) 
     filterSelection(filterOptions)
     
 }
@@ -107,7 +107,7 @@ function filterDanceability(c) {
 function filterSelection(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
-    console.log(c)
+    // console.log(c)
     if (c[0] == "all") c[0] = "";
     if (c[1] == "all") c[1] = "";
     if (c[2] == "all") c[2] = "";
@@ -159,8 +159,8 @@ var vbtns = document.getElementsByClassName("vbtn");
 for (var i = 0; i < vbtns.length; i++){
     vbtns[i].addEventListener("click", function(){
         var current = document.getElementsByClassName('vbtn active')
-        console.log(current)
-        console.log(current[0])
+        // console.log(current)
+        // console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
@@ -170,8 +170,8 @@ var ebtns = document.getElementsByClassName("ebtn");
 for (var i = 0; i < ebtns.length; i++){
     ebtns[i].addEventListener("click", function(){
         var current = document.getElementsByClassName('ebtn active')
-        console.log(current)
-        console.log(current[0])
+        // console.log(current)
+        // console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
@@ -182,8 +182,8 @@ var dbtns = document.getElementsByClassName("dbtn");
 for (var i = 0; i < dbtns.length; i++){
     dbtns[i].addEventListener("click", function(){
         var current = document.getElementsByClassName('dbtn active')
-        console.log(current)
-        console.log(current[0])
+        // console.log(current)
+        // console.log(current[0])
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
