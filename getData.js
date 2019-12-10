@@ -20,7 +20,7 @@ function GenerateList(DataDict){
         <div class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'>
             <img class = 'image divitem' src="${item.imagehref}" alt="ablum cover" style="width:80px;height:80px;">
             <div class = 'divitem'>
-                <img src="${item.artistimagehref}" alt="ablum cover" style="width:35px;height:35px;">
+                <img class = 'artistimage' src="${item.artistimagehref}" alt="ablum cover" style="width:35px;height:35px;">
                 <li class = 'Onelistitem'>${item.artists}</li>
                 <li class = 'Onelistitem'> Track Name: ${item.trackName} </li>
                 <li class = 'Onelistitem'> Genre: ${item.genre} </li>

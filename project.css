@@ -1,50 +1,67 @@
 h1, h2, h3, h4, h5, h6,p{
-    font-family: 'Roboto', 'sans-serif';
-    margin:50px 0;
+  font-family: 'Roboto', 'sans-serif';
+  margin:50px 0;
 
 }
 
 li, a{
-    color:white;
+  color:white;
 }
 
 h1{
-  font-family: 'Open sans', 'sans-serif';
-  font-weight: 800;
-  font-size:60px;
-  letter-spacing: 1px;
-    color:white;
+font-family: 'Open sans', 'sans-serif';
+font-weight: 800;
+font-size:60px;
+letter-spacing: 1px;
+  color:white;
 }
 
 p{
-  color:gray;
+color:gray;
 }
 
 h2{
-  font-weight: 500;
-  font-size: 40px;
-    color:white;
+font-weight: 500;
+font-size: 40px;
+  color:white;
 }
 
 body{
-  background: #1E1E1E;
+background: #1E1E1E;
 }
 
 .cover{
-  height:100vh;
+height:100vh;
 }
 
 #tracklist_chen{
-  margin-top:5px ; 
-  padding: 15px 0px ; 
+margin-top:5px ; 
+padding: 15px 0px ; 
 
 }
 
-#tracklist_chen li {
-  padding: 10px 0px ; 
+/* #tracklist_chen li {
+padding: 1px 0px ; 
 
-}
+} */
 
 .divitem {
-  display: inline-block;
+display: inline-block;
+}
+
+.image{
+margin-bottom:113px
+}
+
+.divitem li {
+list-style-type: none;
+}
+
+.listitem{
+display:inline-block ;
+margin: 0 10px
+}
+
+.Onelistitem{
+width: 260px
 }
