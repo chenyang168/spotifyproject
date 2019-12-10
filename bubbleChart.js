@@ -47,9 +47,9 @@ var bubbleChart = function(width, height, selection) {
 
 define(function(){
 	var displayGenreChart= function(data) {
-		var width = window.innerWidth, height = 2000;
+		var width = window.innerWidth, height = 1000;
 		var data = dealWithData(data);
-		var chart = bubbleChart(width,height,'#genreChart');
+		var chart = bubbleChart(width,height,'#genreAllChart');
 		var dataLength = data.length;
 		var domain = getMinMax(data);
 		var customScale = d3.scaleLinear().domain(domain).range([2,200]);
@@ -76,7 +76,8 @@ define(function(){
 		    .append('circle')
 		    .merge(u)
 		    .attr('transform', function(d) {
-		      return 'translate('+d.x+','+d.y+')'
+		    	console.log(d.x,d.y);
+		    	return 'translate('+d.x+','+d.y+')'
 		    })
 		    
 
