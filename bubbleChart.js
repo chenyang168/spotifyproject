@@ -99,6 +99,7 @@ define(function(){
 		$(window).scroll(function() {
 			var hdis = $('#genreAllChart').offset().top;
 			if(hdis<200) {
+				console.log('shouldtrigger');
 				simulation(width, height, data);
 			}
 		});
