@@ -50,18 +50,29 @@ display: inline-block;
 }
 
 .image{
-margin-bottom:113px
+  
+margin: 0 10px;
+margin-bottom:60px;
 }
 
 .divitem li {
 list-style-type: none;
 }
 
-.listitem{
+/* .listitem */
+.displayinline{
 display:inline-block ;
 margin: 0 10px
 }
 
 .Onelistitem{
 width: 260px
+}
+
+.artistimage{
+  display:inline-block ;
+}
+
+.songname{
+    display:inline-block ;
 }
