@@ -1,0 +1,35 @@
+h1, h2, h3, h4, h5, h6,p{
+    font-family: 'Roboto', 'sans-serif';
+    margin:50px 0;
+
+}
+
+li, a{
+    color:white;
+}
+
+h1{
+  font-family: 'Open sans', 'sans-serif';
+  font-weight: 800;
+  font-size:60px;
+  letter-spacing: 1px;
+    color:white;
+}
+
+p{
+  color:gray;
+}
+
+h2{
+  font-weight: 500;
+  font-size: 40px;
+    color:white;
+}
+
+body{
+  background: #1E1E1E;
+}
+
+.cover{
+  height:100vh;
+}

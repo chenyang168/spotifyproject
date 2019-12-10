@@ -2,12 +2,39 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>main page</title>
+	<title>Learn Your Music Taste</title>
+	<script src=https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js></script>
+	<script type="text/javascript" src='getData.js'></script>
+
+
+	<!-- Import Vega 5 & Vega-Lite & vega-embed (does not have to be from CDN) -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.4.0"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, project_hover-to-fit=no">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="css/project.css">
+
+	<!--Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="icon" href="img/logo1.png">
+
+
 	<script src="https://d3js.org/d3-color.v1.min.js"></script>
 	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src=https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js></script>
+
+	<!--css-->
 	<style>
 		.hide {
 			display: none;
@@ -51,73 +78,112 @@
 
 
 		</style>
+		<link rel="stylesheet" href="project.css">
+
 </head>
 
 <body>
-
-	<div id = "alldata"> </div>
-
-	<h1> Spotify Project </h1>
-
-
-	<div id = "genre"> 
-		<div class = 'substitle'>
-			<h2>Genre Analysis</h2>
+	<div class="container">
+		<div class="cover d-flex align-items-center">
+			<h1>LEARN YOUR MUSIC TASTE WITH US</h1>
 		</div>
-		<div class = 'description'>
-			<p>This part for Yinyin and Yuki</p>
-		</div>
-		<div id = 'genreChart'></div>
-	</div>
-
-
-	<div id = "feature"> 
-		<div class = 'substitle'>
-			<h2>Feature Analysis</h2>
-		</div>
-		<div class = 'description'>
-			<p>This part for Yaying and Shirely</p>
-		</div>
-		<div id = 'featureChart'></div>
-	</div>
-
 	
-	<div id = "customize"> 
-		<div class = 'substitle'>
-			<h2>Customize your playlist</h2>
-		</div>
-		<div class = 'description'>
-			<p>This part for Chen</p>
-		</div>
-		<div id = 'customizeChart'>
-
-			<div class="dropdown valence">
-				<button  class="dropbtn ValenceDropdown">Valence</button>
-				<div id = 'ValenceDropdown' class="dropdown-content"> 
-
+		<div class="row">
+			<div id = "genre">
+				<div class = 'substitle'>
+					<h2>Let's Start With the Music Genre You Listen to</h2>
+				</div>
+				<div id = 'genreAllChart'></div>
+			</div>
+			
+			<div id = "genre">
+				<div class = 'substitle'>
+					<h2>Let's See How Your Music Taste Changed Overtime</h2>
+				</div>
+				<div id = 'genreChart'></div>
+			</div>
+	
+			<div id = "feature">
+				<h2>Here's How You Listen</h2>
+				<p>Spotify defines songs with different music features to understand users' music taste, so they can have a better algorithm to recommend songs. Here are some of the features that we explore:</p>
+				<div class="row">
+					<div class="col">
+					 <p><strong>Danceability</strong> describes how suitable a track is for dancing.</p>
+								 <!-- A value of 0.0 is least danceable and 1.0 is most danceable. -->
+					</div>
+					<div class="col">
+						<p>	<strong>Energy</strong> represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy.</p>
+	
+						<!-- Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). -->
+					</div>
+					<div class="col">
+						<p><strong>Valence</strong> describes the musical positiveness conveyed by a track.</li></p>
+	
+					</div>
+				</div>
+	
+				<div id = 'featureChart'></div>
+			</div>
+	
+			<div id = "customize">
+				<div class = 'substitle'>
+					<h2>Customize your playlist</h2>
+				</div>
+				<div class = 'description'>
+					<p>This part for Chen</p>
+				</div>
+				<div id = 'customizeChart'>
+		
+					<div class="dropdown valence">
+						<button  class="dropbtn ValenceDropdown">Valence</button>
+						<div id = 'ValenceDropdown' class="dropdown-content"> 
+		
+						</div>
+					</div>
+		
+					<div class="dropdown energy">
+						<button class="dropbtn EnergyDropdown">Energy</button>
+						<div id = 'EnergyDropdown' class="dropdown-content"> 
+		
+						</div>
+					</div>
+		
+					<div class="dropdown danceability">
+						<button class="dropbtn DanceabilityDropdown">Danceability</button>
+						<div id = 'DanceabilityDropdown' class="dropdown-content"> 
+		
+						</div>
+					</div>
+		
+					<div>
+						<ul id = 'tracklist_chen'>
+						</ul>
+					</div>
 				</div>
 			</div>
-
-			<div class="dropdown energy">
-				<button class="dropbtn EnergyDropdown">Energy</button>
-				<div id = 'EnergyDropdown' class="dropdown-content"> 
-
-				</div>
-			</div>
-
-			<div class="dropdown danceability">
-				<button class="dropbtn DanceabilityDropdown">Danceability</button>
-				<div id = 'DanceabilityDropdown' class="dropdown-content"> 
-
-				</div>
-			</div>
-
-			<div>
-				<ul id = 'tracklist_chen'>
-				</ul>
-			</div>
+	
 		</div>
 	</div>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+	// var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
+	let genreChart="json/genreChart.json";
+	let features="json/features.json";
+
+	vegaEmbed('#genreChart', genreChart,).catch(console.error);
+		vegaEmbed('#featureChart', features,).catch(console.error);
+
+	</script>
+	<script src="require.js" data-main="getData"></script>
+
 </body>
-<script src="require.js" data-main="getData"></script>
 </html>
