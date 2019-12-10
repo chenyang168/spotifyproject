@@ -12,6 +12,17 @@ var finalData = [];
 var filterOptions = ["all","all","all"]
 var allVals = ['High','Meidum','Low']
 
+
+var tracklist_chen = ``
+function GenerateList(DataDict){
+    for (item of DataDict){
+        tracklist_chen += `
+        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
+        `
+        }
+    document.getElementById("tracklist_chen").innerHTML = tracklist_chen
+}
+
 var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
     valencelist += `
@@ -140,16 +151,6 @@ for (var i = 0; i < btns.length; i++){
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
       });
-}
-
-var tracklist_chen = ``
-function GenerateList(DataDict){
-    for (item of DataDict){
-        tracklist_chen += `
-        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
-        `
-        }
-    document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
 
 // multiple filter done
