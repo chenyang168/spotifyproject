@@ -65,7 +65,7 @@ define(function(){
 								// .attr('stroke','blue');
 		var text = eachBlock.append('text').text(function(d) {return d.name})
 								.attr('dx', '-5')
-								.attr('fill','black')
+								.attr('fill','white')
 			
 		function ticked() {	
 		  var u = d3.select('svg')
@@ -96,7 +96,13 @@ define(function(){
 						.on('tick', ticked);
 			return simulation;
 		};
-		simulation(width, height, data);
+		$(window).scroll(function() {
+			var hdis = $('#genreAllChart').offset().top;
+			if(hdis<200) {
+				simulation(width, height, data);
+			}
+		});
+		
 	};
 	return {
 		displayGenreChart:displayGenreChart
