@@ -96,16 +96,16 @@ define(function(){
 			return simulation;
 		};
 
-		var animation = d3.graphScroll()
-			.sections(d3.selectAll('h2'))
-			.on('active', function(i) {
-				console.log(i);
-				if(i===1 && scroll) {
-					simulation(width, height, data);
-					scroll=false;
-				}
-			})
-			
+		// var animation = d3.graphScroll()
+		// 	.sections(d3.selectAll('h2'))
+		// 	.on('active', function(i) {
+		// 		console.log(i);
+		// 		if(i===1 && scroll) {
+		// 			simulation(width, height, data);
+		// 			scroll=false;
+		// 		}
+		// 	})
+		simulation(width, height, data);	
 		
 	};
 	return {
