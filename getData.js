@@ -208,6 +208,7 @@ function data_savedTrack(allItems) {
         oneItem['albumid'] = item.track.album.id;
         oneItem['imagehref'] = item.track.album.images[0]['url'];
         oneItem['popularity'] = item.track.popularity
+        oneItem['samplelink'] = item.track.external_urls.spotify
         cleanItems.push(oneItem);
     }
     return cleanItems;
@@ -260,9 +261,12 @@ function getTrackGenre(token,i) {
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
+                        console.log(data)
                         var genre = data.genres;
-                        var artistImage = data.images[0].url
-                        addArtImageToTrack(artistImage, i)
+                        var artistImage = data.images
+                        if (artistImage.length != 0){
+                            addArtImageToTrack(artistImage[0].url, i)
+                        }
                         if(genre.length != 0){
                             trackGenre[trackId] = genre
                             // console.log(genre)
@@ -385,6 +389,7 @@ function GetFeaturesfromIds(ids,total,token){
                                     track_f['trackName'] = track_t.trackName;
                                     track_f['popularity'] = track_t.popularity;
                                     track_f['artistimagehref'] = track_t.artistimagehref;
+                                    track_f['samplelink'] = track_t.samplelink;
                                 }
                             }
                         }
