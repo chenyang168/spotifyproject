@@ -83,7 +83,6 @@ function filterDanceability(c) {
     
 }
 
-filterSelection(['all','all','all'])
 function filterSelection(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
@@ -96,6 +95,7 @@ function filterSelection(c) {
       if (((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1)) && (x[i].className.indexOf(c[2]) > -1)) {w3AddClass(x[i], "show")};
     }
 }
+
 
 function w3AddClass(element, name) {
     var i, arr1, arr2;
@@ -382,6 +382,8 @@ function GetFeaturesfromIds(ids,total,token){
         
                     downloadCSV({ filename: "stock-data.csv" },finalData)     
                     GenerateList(finalData)
+                    filterSelection(['all','all','all'])
+
                     }
                 }
             });
