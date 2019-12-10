@@ -10,14 +10,14 @@ var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
 var finalData = [];
 var filterOptions = ["all","all","all"]
-var allVals = ['High','Meidum','Low']
+var allVals = ['high','meidum','low']
 
 
 var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
-        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
+        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter} show'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
         `
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
