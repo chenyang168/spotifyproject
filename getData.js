@@ -12,8 +12,6 @@ var finalData = [];
 var filterOptions = ["all","all","all"]
 var allVals = ['High','Meidum','Low']
 
-$(function() {
-
 var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
     valencelist += `
@@ -38,7 +36,6 @@ for (val of allVals){
 }
 document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
 
-});
 
 filterValence("all")
 function filterValence(c) {
