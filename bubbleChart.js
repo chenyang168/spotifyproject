@@ -48,7 +48,7 @@ var bubbleChart = function(width, height, selection) {
 define(function(){
 	var displayGenreChart= function(data) {
 		var scroll = true;
-		var width = window.innerWidth, height = 1000;
+		var width = window.innerWidth, height = 1500;
 		var data = dealWithData(data);
 		var chart = bubbleChart(width,height,'#genreAllChart');
 		var dataLength = data.length;
