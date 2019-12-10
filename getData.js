@@ -17,9 +17,9 @@ var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
-        <div>
+        <div class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'>
             <img src="${item.imagehref}" alt="ablum cover" style="width:50px;height:60px;">
-            <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li>
+            <li> ${item.trackName}, ${item.artists}, ${item.genre} </li>
         </div> 
         `
         }
