@@ -33,3 +33,14 @@ body{
 .cover{
   height:100vh;
 }
+
+#tracklist_chen{
+  margin-top:5px ; 
+  padding: 15px 0px ; 
+
+}
+
+#tracklist_chen li {
+  padding: 10px 0px ; 
+
+}

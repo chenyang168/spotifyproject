@@ -17,7 +17,10 @@ var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
-        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
+        <div>
+            <img src="${item.imagehref}" alt="ablum cover" style="width:50px;height:60px;">
+            <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li>
+        </div> 
         `
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
