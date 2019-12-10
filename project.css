@@ -78,18 +78,15 @@ width: 320px
 }
 
 #valence{
-  width: 100%;
-  background-color: #F09141
+  color: #F09141
 }
 
 #energy{
-  width: 100%;
-  background-color: #BE4774
+  color: #BE4774
 }
 
 #danceability{
-  width: 100%;
-  background-color: #6E288B
+  color: #6E288B
 }
 
 .containerchart{
