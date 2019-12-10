@@ -25,7 +25,7 @@ function GenerateList(DataDict){
                 <li class = 'Onelistitem'> Track Name: ${item.trackName} </li>
                 <li class = 'Onelistitem'> Genre: ${item.genre} </li>
             </div>
-            <div class = 'divitem'>
+            <div class = 'container divitem'>
                 <div id = 'valence' class = 'features valence'> ${item.valence} </div>
                 <div id = 'energy' class = 'features energy'> ${item.energy} </div>
                 <div id = 'danceability' class = 'features danceability'> ${item.danceability} </div>
