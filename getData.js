@@ -23,26 +23,26 @@ function GenerateList(DataDict){
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
 
-var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
+var valencelist = ` <button class="vbtn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
     valencelist += `
-        <button class="btn" onclick="filterValence('${val}')">${val}</button>
+        <button class="vbtn" onclick="filterValence('${val}')">${val}</button>
     `
 }
 document.getElementById('ValenceDropdown').innerHTML = valencelist
 
-var energylist = ` <button class="btn active" onclick="filterEnergy('all')">all</button>`
+var energylist = ` <button class="ebtn active" onclick="filterEnergy('all')">all</button>`
 for (val of allVals){
     energylist += `
-        <button class="btn" onclick="filterEnergy('${val}')">${val}</button>
+        <button class="ebtn" onclick="filterEnergy('${val}')">${val}</button>
     `
 }
 document.getElementById('EnergyDropdown').innerHTML = energylist
 
-var danceabilitylist = ` <button class="btn active" onclick="filterDanceability('all')">all</button>`
+var danceabilitylist = ` <button class="dbtn active" onclick="filterDanceability('all')">all</button>`
 for (val of allVals){
     danceabilitylist += `
-        <button class="btn" onclick="filterDanceability('${val}')">${val}</button>
+        <button class="dbtn" onclick="filterDanceability('${val}')">${val}</button>
     `
 }
 document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
@@ -56,6 +56,7 @@ function filterValence(c) {
     } else {   
         c = 'valence'+c
     };
+    console.log(c)
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(0,1,c);
@@ -71,6 +72,7 @@ function filterEnergy(c) {
     }else {
         c = 'energy'+c
     };
+    console.log(c)
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(1,2,c);
@@ -86,6 +88,7 @@ function filterDanceability(c) {
     }else{
         c = 'dance'+c
     };
+    console.log(c)
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
       if (x[i].className.indexOf(c) > -1) filterOptions.splice(2,3,c);
@@ -143,9 +146,30 @@ for (item of dropdown){
     });
 }    
 
-var btns = document.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++){
-    btns[i].addEventListener("click", function(){
+var vbtns = document.getElementsByClassName("vbtn");
+for (var i = 0; i < vbtns.length; i++){
+    vbtns[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active");
+        console.log(current)
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+}
+
+var ebtns = document.getElementsByClassName("ebtn");
+for (var i = 0; i < ebtns.length; i++){
+    ebtns[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active");
+        console.log(current)
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+}
+
+
+var dbtns = document.getElementsByClassName("dbtn");
+for (var i = 0; i < dbtns.length; i++){
+    dbtns[i].addEventListener("click", function(){
         var current = document.getElementsByClassName("active");
         console.log(current)
         current[0].className = current[0].className.replace(" active", "");
