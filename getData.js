@@ -12,7 +12,6 @@ var finalData = [];
 var filterOptions = ["all","all","all"]
 var allVals = ['High','Meidum','Low']
 
-//dummy data
 $(function() {
 
 var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
@@ -23,7 +22,6 @@ for (val of allVals){
 }
 document.getElementById('ValenceDropdown').innerHTML = valencelist
 
-// energy filter
 var energylist = ` <button class="btn active" onclick="filterEnergy('all')">all</button>`
 for (val of allVals){
     energylist += `
@@ -32,7 +30,6 @@ for (val of allVals){
 }
 document.getElementById('EnergyDropdown').innerHTML = energylist
 
-// danceability filter
 var danceabilitylist = ` <button class="btn active" onclick="filterDanceability('all')">all</button>`
 for (val of allVals){
     danceabilitylist += `
@@ -43,12 +40,10 @@ document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
 
 });
 
-
 filterValence("all")
 function filterValence(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
-    c = 'valence'+ c
     if (c == "all") {c = ""
     } else {   
         c = 'valence'+c
@@ -64,7 +59,6 @@ filterEnergy("all")
 function filterEnergy(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
-    c = 'energy'+ c
     if (c == "all") {c = ""
     }else {
         c = 'energy'+c
@@ -78,7 +72,6 @@ function filterEnergy(c) {
 
 filterDanceability("all")
 function filterDanceability(c) {
-    console.log(1)
     var x, i;
     x = document.getElementsByClassName("listitem");
     if (c == "all") {c = ""
@@ -91,8 +84,6 @@ function filterDanceability(c) {
       filterSelection(filterOptions)
     }
 }
-
-
 
 filterSelection(['all','all','all'])
 function filterSelection(c) {
@@ -164,7 +155,7 @@ function GenerateList(DataDict){
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
 
-//dummy data end
+// multiple filter done
 
 
 
