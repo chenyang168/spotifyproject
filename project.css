@@ -76,3 +76,15 @@ width: 260px
 .songname{
     display:inline-block ;
 }
+
+.valence{
+  color: white
+}
+
+.energy{
+  color: white
+}
+
+.danceability{
+  color: white
+}

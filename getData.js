@@ -27,8 +27,8 @@ function GenerateList(DataDict){
             </div>
             <div class = 'divitem'>
                 <div class = 'features valence'> ${item.valence} </div>
-                <div class = 'features valence'> ${item.energy} </div>
-                <div class = 'features valence'> ${item.danceability} </div>
+                <div class = 'features energy'> ${item.energy} </div>
+                <div class = 'features danceability'> ${item.danceability} </div>
             </div>
         </div> 
         `
