@@ -26,15 +26,23 @@ function GenerateList(DataDict){
                 <li class = 'Onelistitem'> Genre: ${item.genre} </li>
             </div>
             <div class = 'divitem'>
-                <div class = 'features valence'> ${item.valence} </div>
-                <div class = 'features energy'> ${item.energy} </div>
-                <div class = 'features danceability'> ${item.danceability} </div>
+                <div id = 'valence' class = 'features valence'> ${item.valence} </div>
+                <div id = 'energy' class = 'features energy'> ${item.energy} </div>
+                <div id = 'danceability' class = 'features danceability'> ${item.danceability} </div>
             </div>
         </div> 
         `
+        var valencedata = (item.valence * 100).toFixed(2) + '%'
+        var energydata = (item.energy * 100).toFixed(2) + '%'
+        var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
+        document.getElementById('valence').style.width = valencedata
+        document.getElementById('energy').style.width = energydata
+        document.getElementById('danceability').style.width = danceabilitydata
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
+
+
 
 var valencelist = ` <button class="vbtn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
