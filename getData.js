@@ -18,8 +18,13 @@ function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
         <div class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'>
-            <img src="${item.imagehref}" alt="ablum cover" style="width:50px;height:60px;">
-            <li> ${item.trackName}, ${item.artists}, ${item.genre} </li>
+            <img class = 'image divitem' src="${item.imagehref}" alt="ablum cover" style="width:80px;height:80px;">
+            <div class = 'divitem'>
+                <img src="${item.artistimagehref}" alt="ablum cover" style="width:35px;height:35px;">
+                <li class = 'Onelistitem'>${item.artists}</li>
+                <li class = 'Onelistitem'> Track Name: ${item.trackName} </li>
+                <li class = 'Onelistitem'> Genre: ${item.genre} </li>
+            </div>
         </div> 
         `
         }
@@ -208,6 +213,7 @@ function data_savedTrack(allItems) {
         oneItem['albumid'] = item.track.album.id;
         oneItem['imagehref'] = item.track.album.images[0]['url'];
         oneItem['popularity'] = item.track.popularity
+        oneItem['samplelink'] = item.track.external_urls.spotify
         cleanItems.push(oneItem);
     }
     return cleanItems;
@@ -260,7 +266,12 @@ function getTrackGenre(token,i) {
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
+                        console.log(data)
                         var genre = data.genres;
+                        var artistImage = data.images
+                        if (artistImage.length != 0){
+                            addArtImageToTrack(artistImage[0].url, i)
+                        }
                         if(genre.length != 0){
                             trackGenre[trackId] = genre
                             // console.log(genre)
@@ -303,9 +314,12 @@ function addToTrack(data, i) {
     if(i<allTracks.length){
         allTracks[i].genre = data[0];
     }
-    // console.log(i,typeof(allTracks[i].genre));
 }
-
+function addArtImageToTrack(data, i) {   
+    if(i<allTracks.length){
+        allTracks[i].artistimagehref = data;
+    }
+}
 function GetIdLists(total,token){
     var oneHundredListNum =  Math.ceil(total / 100); 
     var index = 1;
@@ -379,6 +393,8 @@ function GetFeaturesfromIds(ids,total,token){
                                     track_f['imagehref'] = track_t.imagehref;
                                     track_f['trackName'] = track_t.trackName;
                                     track_f['popularity'] = track_t.popularity;
+                                    track_f['artistimagehref'] = track_t.artistimagehref;
+                                    track_f['samplelink'] = track_t.samplelink;
                                 }
                             }
                         }

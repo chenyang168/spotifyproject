@@ -44,3 +44,7 @@ body{
   padding: 10px 0px ; 
 
 }
+
+.divitem {
+  display: inline-block;
+}
