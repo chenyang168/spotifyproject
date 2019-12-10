@@ -3,30 +3,20 @@
 <head>
 	<meta charset="utf-8">
 	<title>Learn Your Music Taste</title>
-	<script src=https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js></script>
-	<script type="text/javascript" src='getData.js'></script>
-
-
 	<!-- Import Vega 5 & Vega-Lite & vega-embed (does not have to be from CDN) -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.4.0"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
 
 	<!-- Required meta tags -->
-	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, project_hover-to-fit=no">
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
-	<link rel="stylesheet" href="css/project.css">
-
 	<!--Fonts-->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-	<link rel="icon" href="img/logo1.png">
-
 
 	<script src="https://d3js.org/d3-color.v1.min.js"></script>
 	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -77,8 +67,8 @@
 		}
 
 
-		</style>
-		<link rel="stylesheet" href="project.css">
+	</style>
+	<link rel="stylesheet" href="project.css">
 
 </head>
 
@@ -89,6 +79,7 @@
 		</div>
 	
 		<div class="row">
+
 			<div id = "genre">
 				<div class = 'substitle'>
 					<h2>Let's Start With the Music Genre You Listen to</h2>
@@ -180,9 +171,10 @@
 	let features="json/features.json";
 
 	vegaEmbed('#genreChart', genreChart,).catch(console.error);
-		vegaEmbed('#featureChart', features,).catch(console.error);
+	vegaEmbed('#featureChart', features,).catch(console.error);
 
 	</script>
+
 	<script src="require.js" data-main="getData"></script>
 
 </body>
