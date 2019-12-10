@@ -17,7 +17,7 @@ var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
         tracklist_chen += `
-        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter} show'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
+        <li class = 'listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'> ${item.trackName}, ${item.artists}, ${item.genre} </li> 
         `
         }
     document.getElementById("tracklist_chen").innerHTML = tracklist_chen
@@ -50,56 +50,47 @@ document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
 
 filterValence("all")
 function filterValence(c) {
-    var x, i;
-    x = document.getElementsByClassName("listitem");
-    if (c == "all") {c = ""
+    if (c == "all") {
+        filterOptions.splice(0,1,c);
     } else {   
         c = 'valence'+c
+        filterOptions.splice(0,1,c);
     };
     console.log(c)
-    for (i = 0; i < x.length; i++) {
-      w3RemoveClass(x[i], "show");
-      if (x[i].className.indexOf(c) > -1) filterOptions.splice(0,1,c);
-      filterSelection(filterOptions)
-    }
+    filterSelection(filterOptions)
 }
 
 filterEnergy("all")
 function filterEnergy(c) {
-    var x, i;
-    x = document.getElementsByClassName("listitem");
-    if (c == "all") {c = ""
+    if (c == "all") {
+        filterOptions.splice(1,2,c);
     }else {
         c = 'energy'+c
+        filterOptions.splice(1,2,c);
     };
-    console.log(c)
-    for (i = 0; i < x.length; i++) {
-      w3RemoveClass(x[i], "show");
-      if (x[i].className.indexOf(c) > -1) filterOptions.splice(1,2,c);
-      filterSelection(filterOptions)
-    }
+    console.log(c) 
+    filterSelection(filterOptions)
+    
 }
 
 filterDanceability("all")
 function filterDanceability(c) {
-    var x, i;
-    x = document.getElementsByClassName("listitem");
-    if (c == "all") {c = ""
+    if (c == "all") {
+        filterOptions.splice(2,3,c);
     }else{
         c = 'dance'+c
+        filterOptions.splice(2,3,c);
     };
-    console.log(c)
-    for (i = 0; i < x.length; i++) {
-      w3RemoveClass(x[i], "show");
-      if (x[i].className.indexOf(c) > -1) filterOptions.splice(2,3,c);
-      filterSelection(filterOptions)
-    }
+    console.log(c) 
+    filterSelection(filterOptions)
+    
 }
 
 filterSelection(['all','all','all'])
 function filterSelection(c) {
     var x, i;
     x = document.getElementsByClassName("listitem");
+    console.log(c)
     if (c[0] == "all") c[0] = "";
     if (c[1] == "all") c[1] = "";
     if (c[2] == "all") c[2] = "";
@@ -149,7 +140,8 @@ for (item of dropdown){
 var vbtns = document.getElementsByClassName("vbtn");
 for (var i = 0; i < vbtns.length; i++){
     vbtns[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active");
+        var current = document.querySelectorAll('.active,.vbtn')
+        // document.getElementsByClassName("active");
         console.log(current)
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
@@ -159,7 +151,7 @@ for (var i = 0; i < vbtns.length; i++){
 var ebtns = document.getElementsByClassName("ebtn");
 for (var i = 0; i < ebtns.length; i++){
     ebtns[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active");
+        var current = document.querySelectorAll('.active,.ebtn')
         console.log(current)
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
@@ -170,7 +162,7 @@ for (var i = 0; i < ebtns.length; i++){
 var dbtns = document.getElementsByClassName("dbtn");
 for (var i = 0; i < dbtns.length; i++){
     dbtns[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active");
+        var current = document.querySelectorAll('.active,.dbtn')
         console.log(current)
         current[0].className = current[0].className.replace(" active", "");
         this.className += " active";
@@ -272,7 +264,7 @@ function getTrackGenre(token,i) {
                             // console.log(genre)
                             addToTrack(genre, this.indexValue);
                         }else{
-                            console.log('another method');
+                            // console.log('another method');
                             var request =  $.ajax({
                                 url: 'https://api.spotify.com/v1/albums/'+ albumId,
                                 headers: {
@@ -309,7 +301,7 @@ function addToTrack(data, i) {
     if(i<allTracks.length){
         allTracks[i].genre = data[0];
     }
-    console.log(i,typeof(allTracks[i].genre));
+    // console.log(i,typeof(allTracks[i].genre));
 }
 
 function GetIdLists(total,token){
@@ -470,7 +462,7 @@ require(['bubbleChart'],function(bubbleChart) {
                     defferreds2.push(getTrackGenre(token, i));
                 }
                 $.when.apply($,defferreds2).then(function() {
-                    console.log('should be allTrackdata',allTracks);
+                    // console.log('should be allTrackdata',allTracks);
                     bubbleChart.displayGenreChart(allTracks);
                     $.when.apply($,GetIdLists(total,token)).then(function() {
 
