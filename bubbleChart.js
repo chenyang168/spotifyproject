@@ -96,13 +96,9 @@ define(function(){
 						.on('tick', ticked);
 			return simulation;
 		};
-		$(window).scroll(function() {
-			var hdis = $('#genreAllChart').offset().top;
-			if(hdis<200) {
-				console.log('shouldtrigger');
-				simulation(width, height, data);
-			}
-		});
+
+			simulation(width, height, data);
+			
 		
 	};
 	return {
