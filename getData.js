@@ -48,7 +48,6 @@ for (val of allVals){
 document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
 
 
-filterValence("all")
 function filterValence(c) {
     if (c == "all") {
         filterOptions.splice(0,1,c);
@@ -60,7 +59,6 @@ function filterValence(c) {
     filterSelection(filterOptions)
 }
 
-filterEnergy("all")
 function filterEnergy(c) {
     if (c == "all") {
         filterOptions.splice(1,1,c);
@@ -73,7 +71,6 @@ function filterEnergy(c) {
     
 }
 
-filterDanceability("all")
 function filterDanceability(c) {
     if (c == "all") {
         filterOptions.splice(2,1,c);
@@ -96,7 +93,7 @@ function filterSelection(c) {
     if (c[2] == "all") c[2] = "";
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
-      if ((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1) && (x[i].className.indexOf(c[2]) > -1)) {w3AddClass(x[i], "show")};
+      if (((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1)) && (x[i].className.indexOf(c[2]) > -1)) {w3AddClass(x[i], "show")};
     }
 }
 
