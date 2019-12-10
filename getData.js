@@ -9,26 +9,11 @@ var trackGenre = {}
 var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
 var finalData = [];
-
-//dummy data
-$(function() {
 var filterOptions = ["all","all","all"]
 var allVals = ['High','Meidum','Low']
 
-// var allGenres = ['Genre1','Genre2', 'Genre3']
-// var allGenders = ['Male','Female']
-// var fakefinalData = [   {'Name': 'Chen', 'Gender': 'Male', 'Birthday': '11/25/1991','Genre': 'Genre1'},
-//                         {'Name': 'CHEN', 'Gender': 'Female', 'Birthday': '1/2/1992','Genre': 'Genre2'},
-//                         {'Name': 'NNNN', 'Gender': 'Male', 'Birthday': '11/5/1993','Genre': 'Genre3'},
-// ]
-// var tracklist_chen = ``
-// for (fakeitem of fakefinalData){
-//     tracklist_chen += `
-//     <li class = 'listitem hide rank${fakefinalData.indexOf(fakeitem)} ${fakeitem.Genre} ${fakeitem.Gender}'> ${fakeitem.Genre}, ${fakeitem.Name}, ${fakeitem.Gender}, ${fakeitem.Birthday} </li> `
-//     }
-// document.getElementById("tracklist_chen").innerHTML = tracklist_chen
-
-// valence filter
+//dummy data
+$(function() {
 
 var valencelist = ` <button class="btn active" onclick="filterValence('all')">all</button>`
 for (val of allVals){
@@ -55,6 +40,8 @@ for (val of allVals){
     `
 }
 document.getElementById('DanceabilityDropdown').innerHTML = danceabilitylist
+
+});
 
 
 filterValence("all")
@@ -116,7 +103,7 @@ function filterSelection(c) {
     if (c[2] == "all") c[2] = "";
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
-      if ((x[i].className.indexOf(c[0]) > -1)&&(x[i].className.indexOf(c[1]) > -1)&&(x[i].className.indexOf(c[2]) > -1)) w3AddClass(x[i], "show");
+      if ((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1) && (x[i].className.indexOf(c[2]) > -1)) { w3AddClass(x[i], "show")};
     }
 }
 
@@ -166,7 +153,6 @@ for (var i = 0; i < btns.length; i++){
         this.className += " active";
       });
 }
-});
 
 var tracklist_chen = ``
 function GenerateList(DataDict){
