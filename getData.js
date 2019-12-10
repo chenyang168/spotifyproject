@@ -94,7 +94,7 @@ function filterSelection(c) {
     if (c[2] == "all") c[2] = "";
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "show");
-      if ((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1) && (x[i].className.indexOf(c[2]) > -1)) { w3AddClass(x[i], "show")};
+      if ((x[i].className.indexOf(c[0]) > -1) && (x[i].className.indexOf(c[1]) > -1) && (x[i].className.indexOf(c[2]) > -1)) {w3AddClass(x[i], "show")};
     }
 }
 
@@ -367,10 +367,7 @@ function GetFeaturesfromIds(ids,total,token){
                             }
                         }
         
-                    downloadCSV({ filename: "stock-data.csv" },finalData)
-                    for (item of finalData){
-                        console.log(item)
-                    }          
+                    downloadCSV({ filename: "stock-data.csv" },finalData)     
                     GenerateList(finalData)
                     }
                 }
