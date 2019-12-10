@@ -10,7 +10,7 @@ var allIds = [];
 var idsUrl =  'https://api.spotify.com/v1/audio-features';
 var finalData = [];
 var filterOptions = ["all","all","all"]
-var allVals = ['high','meidum','low']
+var allVals = ['high','medium','low']
 
 
 var tracklist_chen = ``
