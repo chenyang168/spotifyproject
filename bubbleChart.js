@@ -47,6 +47,7 @@ var bubbleChart = function(width, height, selection) {
 
 define(function(){
 	var displayGenreChart= function(data) {
+		var scroll = true;
 		var width = window.innerWidth, height = 1000;
 		var data = dealWithData(data);
 		var chart = bubbleChart(width,height,'#genreAllChart');
@@ -95,7 +96,15 @@ define(function(){
 			return simulation;
 		};
 
-			simulation(width, height, data);
+		var animation = d3.graphScroll()
+			.sections(d3.selectAll('h2'))
+			.on('active', function(i) {
+				console.log(i);
+				if(i===1 && scroll) {
+					simulation(width, height, data);
+					scroll=false;
+				}
+			})
 			
 		
 	};
