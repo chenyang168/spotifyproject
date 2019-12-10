@@ -77,15 +77,18 @@ width: 320px
     display:inline-block ;
 }
 
-.valence{
+#valence{
+  width: 100%;
   background-color: #F09141
 }
 
-.energy{
+#energy{
+  width: 100%;
   background-color: #BE4774
 }
 
-.danceability{
+#danceability{
+  width: 100%;
   background-color: #6E288B
 }
 
