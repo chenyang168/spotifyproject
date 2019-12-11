@@ -13,10 +13,10 @@ var filterOptions = ["all","all","all"]
 var allVals = ['high','medium','low']
 
 
-var tracklist_chen = ``
+// var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
-        tracklist_chen += `
+        var tracklist_chen = `
         <div class = 'displayinline listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'>
             <a href= "${item.samplelink}"><img class = 'image divitem' src="${item.imagehref}" alt="ablum cover" style="width:80px;height:80px;"></a>
             <div class = 'divitem'>
@@ -32,21 +32,21 @@ function GenerateList(DataDict){
             </div>
         </div> 
         `
+        document.getElementById("tracklist_chen").innerHTML += tracklist_chen
 
         }
-    document.getElementById("tracklist_chen").innerHTML = tracklist_chen
 }
 
-function Generatefeature(DataDict){
-    for (item of DataDict){
-        var valencedata = (item.valence * 100).toFixed(2) + '%'
-        var energydata = (item.energy * 100).toFixed(2) + '%'
-        var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
-        document.getElementById('valence').style.width = valencedata
-        document.getElementById('energy').style.width = energydata
-        document.getElementById('danceability').style.width = danceabilitydata
-    }
-}
+// function Generatefeature(DataDict){
+//     for (item of DataDict){
+//         var valencedata = (item.valence * 100).toFixed(2) + '%'
+//         var energydata = (item.energy * 100).toFixed(2) + '%'
+//         var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
+//         document.getElementById('valence').style.width = valencedata
+//         document.getElementById('energy').style.width = energydata
+//         document.getElementById('danceability').style.width = danceabilitydata
+//     }
+// }
 
 
 var valencelist = ` <button class="vbtn active" onclick="filterValence('all')">all</button>`
@@ -420,7 +420,7 @@ function GetFeaturesfromIds(ids,total,token){
                     downloadCSV({ filename: "stock-data.csv" },finalData)     
                     GenerateList(finalData)
                     filterSelection(['all','all','all'])
-                    Generatefeature(inalData)
+                    // Generatefeature(inalData)
 
                     }
                 }
