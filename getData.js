@@ -16,6 +16,7 @@ var allVals = ['high','medium','low']
 // var tracklist_chen = ``
 function GenerateList(DataDict){
     for (item of DataDict){
+        var index = DataDict.indexOf(item).toString()
         var tracklist_chen = `
         <div class = 'displayinline listitem hide dance${item.danceability_filter} energy${item.energy_filter} valence${item.valence_filter}'>
             <a href= "${item.samplelink}"><img class = 'image divitem' src="${item.imagehref}" alt="ablum cover" style="width:80px;height:80px;"></a>
@@ -26,27 +27,26 @@ function GenerateList(DataDict){
                 <li class = 'Onelistitem'> Genre: ${item.genre} </li>
             </div>
             <div class = 'divitem containerchart'>
-                <div id = 'valence' class = 'features valence'> ${item.valence} </div>
-                <div id = 'energy' class = 'features energy'> ${item.energy} </div>
-                <div id = 'danceability' class = 'features danceability'> ${item.danceability} </div>
+                <div id = 'valence${index}' class = 'features valence'> ${item.valence} </div>
+                <div id = 'energy${index}' class = 'features energy'> ${item.energy} </div>
+                <div id = 'danceability${index}' class = 'features danceability'> ${item.danceability} </div>
             </div>
         </div> 
         `
         document.getElementById("tracklist_chen").innerHTML += tracklist_chen
 
+        var valencedata = (item.valence * 100).toFixed(2) + '%'
+        var energydata = (item.energy * 100).toFixed(2) + '%'
+        var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
+        var valenceid = 'valence' + index
+        var energyid = 'energy' + index
+        var danceabilityid = 'danceability' + index
+        document.getElementById(valenceid).style.width = valencedata
+        document.getElementById(energyid).style.width = energydata
+        document.getElementById(danceabilityid).style.width = danceabilitydata
+
         }
 }
-
-// function Generatefeature(DataDict){
-//     for (item of DataDict){
-//         var valencedata = (item.valence * 100).toFixed(2) + '%'
-//         var energydata = (item.energy * 100).toFixed(2) + '%'
-//         var danceabilitydata = (item.danceability * 100).toFixed(2) + '%'
-//         document.getElementById('valence').style.width = valencedata
-//         document.getElementById('energy').style.width = energydata
-//         document.getElementById('danceability').style.width = danceabilitydata
-//     }
-// }
 
 
 var valencelist = ` <button class="vbtn active" onclick="filterValence('all')">all</button>`
@@ -420,8 +420,6 @@ function GetFeaturesfromIds(ids,total,token){
                     downloadCSV({ filename: "stock-data.csv" },finalData)     
                     GenerateList(finalData)
                     filterSelection(['all','all','all'])
-                    // Generatefeature(inalData)
-
                     }
                 }
             });
